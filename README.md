@@ -14,7 +14,7 @@ Building practical systems, learning in public, and turning technical ideas into
   <img
     width="100%"
     alt="Hossein Rahimi's GitHub metrics"
-    src="https://metrics.lecoq.io/HoosseinRahimi?template=classic&base=header%2Cactivity%2Ccommunity%2Crepositories%2Cmetadata&config_animations=yes&config_display=columns&config_timezone=Asia%2FTehran&plugin_achievements=yes&plugin_achievements_display=compact&plugin_achievements_threshold=C&plugin_isocalendar=yes&plugin_isocalendar_duration=half-year&plugin_languages=yes&plugin_languages_analysis_timeout=15&plugin_languages_categories=markup%2Cprogramming&plugin_languages_colors=github&plugin_languages_limit=8&plugin_languages_recent_categories=markup%2Cprogramming&plugin_languages_recent_days=14&plugin_languages_recent_load=300&plugin_languages_sections=most-used%2Crecently-used&plugin_languages_threshold=0%25"
+    src="./assets/github-metrics.svg"
   />
 </picture>
 
@@ -40,5 +40,5 @@ Building practical systems, learning in public, and turning technical ideas into
 </table>
 
 <div align="center">
-  <sub>The dashboard updates automatically from public GitHub activity.</sub>
+  <sub>The dashboard refreshes daily from public GitHub activity.</sub>
 </div>
