@@ -54,7 +54,7 @@
   </g>
 
   <text class="heading" x="48" y="365">Featured projects</text>
-  
+
   <g transform="translate(48 382)">
     <rect class="card" width="164" height="80" rx="12"/>
     <text class="link label" x="14" y="24">CCNA_Complex_Network_…</text>
@@ -85,28 +85,28 @@
 
   <text class="heading" x="454" y="49">GitHub metrics</text>
   <text class="muted tiny end" x="1216" y="47">Updated 2026-07-26</text>
-  
+
   <g transform="translate(454 76)">
     <rect class="card" width="176" height="72" rx="12"/>
     <circle cx="24" cy="24" r="5" fill="#2f81f7"/>
     <text class="stat" x="18" y="51">16</text>
     <text class="muted small" x="70" y="29">Public repositories</text>
   </g>
-  
+
   <g transform="translate(642 76)">
     <rect class="card" width="176" height="72" rx="12"/>
     <circle cx="24" cy="24" r="5" fill="#e3b341"/>
     <text class="stat" x="18" y="51">1</text>
     <text class="muted small" x="70" y="29">Stars received</text>
   </g>
-  
+
   <g transform="translate(830 76)">
     <rect class="card" width="176" height="72" rx="12"/>
     <circle cx="24" cy="24" r="5" fill="#a371f7"/>
     <text class="stat" x="18" y="51">0</text>
     <text class="muted small" x="70" y="29">Repository forks</text>
   </g>
-  
+
   <g transform="translate(1018 76)">
     <rect class="card" width="176" height="72" rx="12"/>
     <circle cx="24" cy="24" r="5" fill="#3fb950"/>
@@ -307,7 +307,7 @@
 
   <line class="divider" x1="454" y1="326" x2="1216" y2="326"/>
   <text class="heading" x="454" y="360">Most used languages</text>
-  
+
       <circle cx="470" cy="382" r="5" fill="#DA5B0B"/>
       <text class="label small" x="484" y="386">Jupyter Notebook</text>
       <text class="muted tiny end" x="736" y="386">89.6%</text>
@@ -321,7 +321,7 @@
       <rect x="470" y="425" width="27.770992649558913" height="5" rx="3" fill="#3572A5"/>
 
   <text class="heading" x="810" y="360">Recent public activity</text>
-  
+
       <circle cx="824" cy="392" r="5" fill="#2f81f7"/>
       <text class="label small" x="840" y="390">Pushed commits</text>
       <text class="muted tiny" x="840" y="408">HoosseinRahimi</text>

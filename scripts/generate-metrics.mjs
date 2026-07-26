@@ -280,5 +280,5 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" v
 </svg>`;
 
 await fs.mkdir("assets", { recursive: true });
-await fs.writeFile("assets/github-metrics.svg", svg);
+await fs.writeFile("assets/github-metrics.svg", svg.replace(/[ \t]+$/gm, ""));
 console.log(`Generated assets/github-metrics.svg for ${username}`);
