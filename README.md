@@ -26,8 +26,7 @@ Python developer · Machine learning learner · Algorithm enthusiast · Network 
 I like turning technical ideas into working, understandable projects—from network topologies and routing labs to machine-learning experiments and algorithm visualisations.
 
 My current toolkit is centred around:
-
-\`Python\` · \`Jupyter\` · \`Pandas\` · \`scikit-learn\` · \`Cisco Packet Tracer\` · \`Git\`
+`Python` · `Jupyter` · `Pandas` · `scikit-learn` · `Cisco Packet Tracer` · `Git`
 
 ## Featured work
 
