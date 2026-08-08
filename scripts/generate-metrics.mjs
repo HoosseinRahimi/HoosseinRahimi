@@ -1,40 +1,16 @@
 import fs from "node:fs/promises";
 
+import { compact, isoDate, shortDate, sumBy, truncate } from "./lib/format.mjs";
+import { createClient, fetchDataUri } from "./lib/github.mjs";
+import { circle, escapeXml, heatmapCell, pill, rawText, rect, text } from "./lib/svg.mjs";
+
 const username = process.env.GITHUB_USER || "HoosseinRahimi";
-const token = process.env.GITHUB_TOKEN;
-const apiHeaders = {
-  Accept: "application/vnd.github+json",
-  "User-Agent": `${username}-profile-metrics`,
-  "X-GitHub-Api-Version": "2022-11-28",
-  ...(token ? { Authorization: `Bearer ${token}` } : {}),
-};
-
-async function github(path) {
-  const response = await fetch(`https://api.github.com${path}`, { headers: apiHeaders });
-  if (!response.ok) {
-    throw new Error(`GitHub API ${response.status}: ${path}`);
-  }
-  return response.json();
-}
-
-const escapeXml = (value = "") =>
-  String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&apos;");
-
-const compact = (value) =>
-  new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(value);
-
-const truncate = (value, length) =>
-  value.length > length ? `${value.slice(0, length - 1)}…` : value;
+const github = createClient({ username, token: process.env.GITHUB_TOKEN });
 
 const [user, repositories, events] = await Promise.all([
-  github(`/users/${username}`),
-  github(`/users/${username}/repos?per_page=100&sort=updated`),
-  github(`/users/${username}/events/public?per_page=100`),
+  github.get(`/users/${username}`),
+  github.get(`/users/${username}/repos?per_page=100&sort=updated`),
+  github.get(`/users/${username}/events/public?per_page=100`),
 ]);
 
 const ownedRepositories = repositories.filter(
@@ -42,13 +18,9 @@ const ownedRepositories = repositories.filter(
 );
 
 const languageResponses = await Promise.all(
-  ownedRepositories.slice(0, 20).map(async (repo) => {
-    try {
-      return await github(`/repos/${username}/${repo.name}/languages`);
-    } catch {
-      return {};
-    }
-  }),
+  ownedRepositories
+    .slice(0, 20)
+    .map((repo) => github.getOr(`/repos/${username}/${repo.name}/languages`, {})),
 );
 
 const languageTotals = {};
@@ -58,7 +30,7 @@ for (const languages of languageResponses) {
   }
 }
 
-const totalLanguageBytes = Object.values(languageTotals).reduce((sum, value) => sum + value, 0);
+const totalLanguageBytes = sumBy(Object.values(languageTotals), (bytes) => bytes);
 const topLanguages = Object.entries(languageTotals)
   .sort((a, b) => b[1] - a[1])
   .slice(0, 6)
@@ -78,8 +50,8 @@ const languageColors = {
   Shell: "#89e051",
 };
 
-const totalStars = repositories.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-const totalForks = repositories.reduce((sum, repo) => sum + repo.forks_count, 0);
+const totalStars = sumBy(repositories, (repo) => repo.stargazers_count);
+const totalForks = sumBy(repositories, (repo) => repo.forks_count);
 const accountYears = Math.max(
   1,
   Math.floor((Date.now() - new Date(user.created_at).getTime()) / (365.25 * 24 * 60 * 60 * 1000)),
@@ -101,8 +73,7 @@ let maxActivity = 1;
 for (let dayIndex = 0; dayIndex < 182; dayIndex += 1) {
   const date = new Date(startDate);
   date.setUTCDate(startDate.getUTCDate() + dayIndex);
-  const key = date.toISOString().slice(0, 10);
-  const count = activityByDate.get(key) || 0;
+  const count = activityByDate.get(isoDate(date)) || 0;
   maxActivity = Math.max(maxActivity, count);
   heatmap.push({ date, count });
 }
@@ -121,63 +92,56 @@ const activityLabels = {
 const recentActivity = events.slice(0, 5).map((event) => ({
   label: activityLabels[event.type] || event.type.replace(/Event$/, ""),
   repo: event.repo.name.replace(`${username}/`, ""),
-  date: new Date(event.created_at).toLocaleDateString("en", { month: "short", day: "numeric" }),
+  date: shortDate(event.created_at),
 }));
 
 const featured = [...ownedRepositories]
   .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
   .slice(0, 4);
 
-let avatarData = "";
-try {
-  const avatar = await fetch(user.avatar_url);
-  if (avatar.ok) {
-    const mime = avatar.headers.get("content-type") || "image/jpeg";
-    avatarData = `data:${mime};base64,${Buffer.from(await avatar.arrayBuffer()).toString("base64")}`;
-  }
-} catch {
-  // The dashboard still renders with a monogram when avatar download is unavailable.
-}
+const avatarData = await fetchDataUri(user.avatar_url);
 
 const statCard = (x, label, value, accent) => `
   <g transform="translate(${x} 76)">
-    <rect class="card" width="176" height="72" rx="12"/>
-    <circle cx="24" cy="24" r="5" fill="${accent}"/>
-    <text class="stat" x="18" y="51">${escapeXml(value)}</text>
-    <text class="muted small" x="70" y="29">${escapeXml(label)}</text>
+    ${rect({ className: "card", width: 176, height: 72, rx: 12 })}
+    ${circle({ cx: 24, cy: 24, r: 5, fill: accent })}
+    ${text(value, { className: "stat", x: 18, y: 51 })}
+    ${text(label, { className: "muted small", x: 70, y: 29 })}
   </g>`;
 
-const repoCard = (repo, index) => {
-  const x = 48 + (index % 2) * 176;
-  const y = 382 + Math.floor(index / 2) * 92;
-  return `
-  <g transform="translate(${x} ${y})">
-    <rect class="card" width="164" height="80" rx="12"/>
-    <text class="link label" x="14" y="24">${escapeXml(truncate(repo.name, 22))}</text>
-    <text class="muted tiny" x="14" y="45">${escapeXml(truncate(repo.description || "GitHub project", 27))}</text>
-    <text class="muted tiny" x="14" y="65">★ ${repo.stargazers_count}   ⑂ ${repo.forks_count}</text>
+const repoCard = (repo, index) => `
+  <g transform="translate(${48 + (index % 2) * 176} ${382 + Math.floor(index / 2) * 92})">
+    ${rect({ className: "card", width: 164, height: 80, rx: 12 })}
+    ${text(truncate(repo.name, 22), { className: "link label", x: 14, y: 24 })}
+    ${text(truncate(repo.description || "GitHub project", 27), { className: "muted tiny", x: 14, y: 45 })}
+    ${text(`★ ${repo.stargazers_count}   ⑂ ${repo.forks_count}`, { className: "muted tiny", x: 14, y: 65 })}
   </g>`;
-};
 
 const heatmapCells = heatmap
-  .map(({ date, count }, index) => {
-    const week = Math.floor(index / 7);
-    const weekday = index % 7;
-    const intensity = count === 0 ? 0 : Math.max(1, Math.ceil((count / maxActivity) * 4));
-    return `<rect class="level-${intensity}" x="${468 + week * 12}" y="${190 + weekday * 12}" width="9" height="9" rx="2"><title>${date.toISOString().slice(0, 10)}: ${count} public events</title></rect>`;
-  })
+  .map(({ date, count }, index) =>
+    heatmapCell({
+      level: count === 0 ? 0 : Math.max(1, Math.ceil((count / maxActivity) * 4)),
+      x: 468 + Math.floor(index / 7) * 12,
+      y: 190 + (index % 7) * 12,
+      title: `${isoDate(date)}: ${count} public events`,
+    }),
+  )
   .join("\n");
+
+const heatmapLegend = [0, 1, 2, 3, 4]
+  .map((level) => heatmapCell({ level, x: 500 + level * 13, y: 283 }))
+  .join("\n  ");
 
 const languageBars = topLanguages
   .map((language, index) => {
     const y = 386 + index * 31;
     const color = languageColors[language.name] || "#8b949e";
     return `
-      <circle cx="470" cy="${y - 4}" r="5" fill="${color}"/>
-      <text class="label small" x="484" y="${y}">${escapeXml(language.name)}</text>
-      <text class="muted tiny end" x="736" y="${y}">${language.percent.toFixed(1)}%</text>
-      <rect class="track" x="470" y="${y + 8}" width="266" height="5" rx="3"/>
-      <rect x="470" y="${y + 8}" width="${Math.max(2, 266 * (language.percent / 100))}" height="5" rx="3" fill="${color}"/>`;
+      ${circle({ cx: 470, cy: y - 4, r: 5, fill: color })}
+      ${text(language.name, { className: "label small", x: 484, y })}
+      ${text(`${language.percent.toFixed(1)}%`, { className: "muted tiny end", x: 736, y })}
+      ${rect({ className: "track", x: 470, y: y + 8, width: 266, height: 5, rx: 3 })}
+      ${rect({ x: 470, y: y + 8, width: Math.max(2, 266 * (language.percent / 100)), height: 5, rx: 3, fill: color })}`;
   })
   .join("\n");
 
@@ -185,12 +149,26 @@ const recentRows = recentActivity
   .map((activity, index) => {
     const y = 397 + index * 42;
     return `
-      <circle cx="824" cy="${y - 5}" r="5" fill="#2f81f7"/>
-      <text class="label small" x="840" y="${y - 7}">${escapeXml(truncate(activity.label, 30))}</text>
-      <text class="muted tiny" x="840" y="${y + 11}">${escapeXml(truncate(activity.repo, 32))}</text>
-      <text class="muted tiny end" x="1214" y="${y + 1}">${activity.date}</text>`;
+      ${circle({ cx: 824, cy: y - 5, r: 5, fill: "#2f81f7" })}
+      ${text(truncate(activity.label, 30), { className: "label small", x: 840, y: y - 7 })}
+      ${text(truncate(activity.repo, 32), { className: "muted tiny", x: 840, y: y + 11 })}
+      ${text(activity.date, { className: "muted tiny end", x: 1214, y: y + 1 })}`;
   })
   .join("\n");
+
+const monogram = (user.name || username)
+  .split(" ")
+  .map((part) => part[0])
+  .join("")
+  .slice(0, 2);
+
+const skillPills = [
+  { x: 0, width: 78, label: "Python" },
+  { x: 88, width: 116, label: "Machine Learning" },
+  { x: 214, width: 88, label: "Networking" },
+]
+  .map(pill)
+  .join("\n    ");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(user.name || user.login)} GitHub dashboard</title>
@@ -228,55 +206,49 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" v
       }
     </style>
   </defs>
-  <rect class="background" width="1280" height="640" rx="16"/>
+  ${rect({ className: "background", width: 1280, height: 640, rx: 16 })}
   <line class="divider" x1="416" y1="32" x2="416" y2="608"/>
 
   ${avatarData
     ? `<image href="${avatarData}" x="44" y="48" width="128" height="128" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-clip)"/>`
-    : `<circle class="card" cx="108" cy="112" r="64"/><text class="title" x="108" y="121" text-anchor="middle">${escapeXml((user.name || username).split(" ").map((part) => part[0]).join("").slice(0, 2))}</text>`}
-  <text class="title" x="196" y="79">${escapeXml(user.name || user.login)}</text>
-  <text class="link label" x="196" y="103">@${escapeXml(user.login)}</text>
-  <text class="muted small" x="196" y="128">On GitHub for ${accountYears}+ years</text>
-  <text class="muted small" x="196" y="150">${user.followers} followers · ${user.following} following</text>
+    : `${circle({ className: "card", cx: 108, cy: 112, r: 64 })}${text(monogram, { className: "title", x: 108, y: 121, anchor: "middle" })}`}
+  ${text(user.name || user.login, { className: "title", x: 196, y: 79 })}
+  ${rawText(`@${escapeXml(user.login)}`, { className: "link label", x: 196, y: 103 })}
+  ${text(`On GitHub for ${accountYears}+ years`, { className: "muted small", x: 196, y: 128 })}
+  ${text(`${user.followers} followers · ${user.following} following`, { className: "muted small", x: 196, y: 150 })}
 
-  <text class="heading" x="48" y="226">Building practical systems</text>
-  <text class="muted small" x="48" y="251">Python, machine learning, algorithms,</text>
-  <text class="muted small" x="48" y="271">and network engineering.</text>
+  ${text("Building practical systems", { className: "heading", x: 48, y: 226 })}
+  ${text("Python, machine learning, algorithms,", { className: "muted small", x: 48, y: 251 })}
+  ${text("and network engineering.", { className: "muted small", x: 48, y: 271 })}
 
   <g transform="translate(48 298)">
-    <rect class="card" width="78" height="30" rx="15"/><text class="label tiny" x="39" y="20" text-anchor="middle">Python</text>
-    <rect class="card" x="88" width="116" height="30" rx="15"/><text class="label tiny" x="146" y="20" text-anchor="middle">Machine Learning</text>
-    <rect class="card" x="214" width="88" height="30" rx="15"/><text class="label tiny" x="258" y="20" text-anchor="middle">Networking</text>
+    ${skillPills}
   </g>
 
-  <text class="heading" x="48" y="365">Featured projects</text>
+  ${text("Featured projects", { className: "heading", x: 48, y: 365 })}
   ${featured.map(repoCard).join("\n")}
 
-  <text class="heading" x="454" y="49">GitHub metrics</text>
-  <text class="muted tiny end" x="1216" y="47">Updated ${now.toISOString().slice(0, 10)}</text>
+  ${text("GitHub metrics", { className: "heading", x: 454, y: 49 })}
+  ${text(`Updated ${isoDate(now)}`, { className: "muted tiny end", x: 1216, y: 47 })}
   ${statCard(454, "Public repositories", user.public_repos, "#2f81f7")}
   ${statCard(642, "Stars received", compact(totalStars), "#e3b341")}
   ${statCard(830, "Repository forks", compact(totalForks), "#a371f7")}
   ${statCard(1018, "Public events", events.length, "#3fb950")}
 
-  <text class="heading" x="454" y="174">Public activity · last 26 weeks</text>
+  ${text("Public activity · last 26 weeks", { className: "heading", x: 454, y: 174 })}
   ${heatmapCells}
-  <text class="muted tiny" x="468" y="292">Less</text>
-  <rect class="level-0" x="500" y="283" width="9" height="9" rx="2"/>
-  <rect class="level-1" x="513" y="283" width="9" height="9" rx="2"/>
-  <rect class="level-2" x="526" y="283" width="9" height="9" rx="2"/>
-  <rect class="level-3" x="539" y="283" width="9" height="9" rx="2"/>
-  <rect class="level-4" x="552" y="283" width="9" height="9" rx="2"/>
-  <text class="muted tiny" x="568" y="292">More</text>
+  ${text("Less", { className: "muted tiny", x: 468, y: 292 })}
+  ${heatmapLegend}
+  ${text("More", { className: "muted tiny", x: 568, y: 292 })}
 
   <line class="divider" x1="454" y1="326" x2="1216" y2="326"/>
-  <text class="heading" x="454" y="360">Most used languages</text>
-  ${languageBars || `<text class="muted small" x="470" y="398">Language data will appear after the next update.</text>`}
+  ${text("Most used languages", { className: "heading", x: 454, y: 360 })}
+  ${languageBars || text("Language data will appear after the next update.", { className: "muted small", x: 470, y: 398 })}
 
-  <text class="heading" x="810" y="360">Recent public activity</text>
-  ${recentRows || `<text class="muted small" x="824" y="398">Recent activity will appear here.</text>`}
+  ${text("Recent public activity", { className: "heading", x: 810, y: 360 })}
+  ${recentRows || text("Recent activity will appear here.", { className: "muted small", x: 824, y: 398 })}
 
-  <text class="muted tiny" x="1216" y="610" text-anchor="end">Generated from the GitHub public API · github.com/${escapeXml(username)}</text>
+  ${text(`Generated from the GitHub public API · github.com/${username}`, { className: "muted tiny", x: 1216, y: 610, anchor: "end" })}
 </svg>`;
 
 await fs.mkdir("assets", { recursive: true });
