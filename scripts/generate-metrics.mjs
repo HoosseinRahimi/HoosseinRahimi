@@ -1,6 +1,9 @@
 import fs from "node:fs/promises";
 
 const username = process.env.GITHUB_USER || "HoosseinRahimi";
+if (!/^[A-Za-z\d](?:[A-Za-z\d]|-(?=[A-Za-z\d])){0,38}$/.test(username)) {
+  throw new Error("GITHUB_USER is not a valid GitHub username.");
+}
 const token = process.env.GITHUB_TOKEN;
 const apiHeaders = {
   Accept: "application/vnd.github+json",
@@ -10,7 +13,10 @@ const apiHeaders = {
 };
 
 async function github(path) {
-  const response = await fetch(`https://api.github.com${path}`, { headers: apiHeaders });
+  const response = await fetch(`https://api.github.com${path}`, {
+    headers: apiHeaders,
+    signal: AbortSignal.timeout(30_000),
+  });
   if (!response.ok) {
     throw new Error(`GitHub API ${response.status}: ${path}`);
   }
@@ -32,9 +38,9 @@ const truncate = (value, length) =>
   value.length > length ? `${value.slice(0, length - 1)}…` : value;
 
 const [user, repositories, events] = await Promise.all([
-  github(`/users/${username}`),
-  github(`/users/${username}/repos?per_page=100&sort=updated`),
-  github(`/users/${username}/events/public?per_page=100`),
+  github(`/users/${encodeURIComponent(username)}`),
+  github(`/users/${encodeURIComponent(username)}/repos?per_page=100&sort=updated`),
+  github(`/users/${encodeURIComponent(username)}/events/public?per_page=100`),
 ]);
 
 const ownedRepositories = repositories.filter(
@@ -44,7 +50,7 @@ const ownedRepositories = repositories.filter(
 const languageResponses = await Promise.all(
   ownedRepositories.slice(0, 20).map(async (repo) => {
     try {
-      return await github(`/repos/${username}/${repo.name}/languages`);
+      return await github(`/repos/${encodeURIComponent(username)}/${encodeURIComponent(repo.name)}/languages`);
     } catch {
       return {};
     }
@@ -128,12 +134,22 @@ const featured = [...ownedRepositories]
   .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
   .slice(0, 4);
 
+const allowedAvatarTypes = new Set(["image/png", "image/jpeg", "image/gif", "image/webp"]);
+const maxAvatarBytes = 2 * 1024 * 1024;
+
 let avatarData = "";
 try {
-  const avatar = await fetch(user.avatar_url);
+  const avatarUrl = new URL(user.avatar_url);
+  if (avatarUrl.protocol !== "https:" || !avatarUrl.hostname.endsWith(".githubusercontent.com")) {
+    throw new Error(`Unexpected avatar host: ${avatarUrl.hostname}`);
+  }
+  const avatar = await fetch(avatarUrl, { signal: AbortSignal.timeout(15_000) });
   if (avatar.ok) {
-    const mime = avatar.headers.get("content-type") || "image/jpeg";
-    avatarData = `data:${mime};base64,${Buffer.from(await avatar.arrayBuffer()).toString("base64")}`;
+    const mime = (avatar.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
+    const bytes = Buffer.from(await avatar.arrayBuffer());
+    if (allowedAvatarTypes.has(mime) && bytes.byteLength <= maxAvatarBytes) {
+      avatarData = `data:${mime};base64,${bytes.toString("base64")}`;
+    }
   }
 } catch {
   // The dashboard still renders with a monogram when avatar download is unavailable.
@@ -155,7 +171,7 @@ const repoCard = (repo, index) => {
     <rect class="card" width="164" height="80" rx="12"/>
     <text class="link label" x="14" y="24">${escapeXml(truncate(repo.name, 22))}</text>
     <text class="muted tiny" x="14" y="45">${escapeXml(truncate(repo.description || "GitHub project", 27))}</text>
-    <text class="muted tiny" x="14" y="65">★ ${repo.stargazers_count}   ⑂ ${repo.forks_count}</text>
+    <text class="muted tiny" x="14" y="65">★ ${Number(repo.stargazers_count) || 0}   ⑂ ${Number(repo.forks_count) || 0}</text>
   </g>`;
 };
 
@@ -188,7 +204,7 @@ const recentRows = recentActivity
       <circle cx="824" cy="${y - 5}" r="5" fill="#2f81f7"/>
       <text class="label small" x="840" y="${y - 7}">${escapeXml(truncate(activity.label, 30))}</text>
       <text class="muted tiny" x="840" y="${y + 11}">${escapeXml(truncate(activity.repo, 32))}</text>
-      <text class="muted tiny end" x="1214" y="${y + 1}">${activity.date}</text>`;
+      <text class="muted tiny end" x="1214" y="${y + 1}">${escapeXml(activity.date)}</text>`;
   })
   .join("\n");
 
@@ -237,7 +253,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" v
   <text class="title" x="196" y="79">${escapeXml(user.name || user.login)}</text>
   <text class="link label" x="196" y="103">@${escapeXml(user.login)}</text>
   <text class="muted small" x="196" y="128">On GitHub for ${accountYears}+ years</text>
-  <text class="muted small" x="196" y="150">${user.followers} followers · ${user.following} following</text>
+  <text class="muted small" x="196" y="150">${Number(user.followers) || 0} followers · ${Number(user.following) || 0} following</text>
 
   <text class="heading" x="48" y="226">Building practical systems</text>
   <text class="muted small" x="48" y="251">Python, machine learning, algorithms,</text>
@@ -254,7 +270,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" v
 
   <text class="heading" x="454" y="49">GitHub metrics</text>
   <text class="muted tiny end" x="1216" y="47">Updated ${now.toISOString().slice(0, 10)}</text>
-  ${statCard(454, "Public repositories", user.public_repos, "#2f81f7")}
+  ${statCard(454, "Public repositories", Number(user.public_repos) || 0, "#2f81f7")}
   ${statCard(642, "Stars received", compact(totalStars), "#e3b341")}
   ${statCard(830, "Repository forks", compact(totalForks), "#a371f7")}
   ${statCard(1018, "Public events", events.length, "#3fb950")}
