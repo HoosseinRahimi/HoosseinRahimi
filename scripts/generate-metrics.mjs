@@ -1,7 +1,9 @@
 import fs from "node:fs/promises";
+import process from "node:process";
 
 const username = process.env.GITHUB_USER || "HoosseinRahimi";
 const token = process.env.GITHUB_TOKEN;
+const strict = /^(1|true|yes)$/i.test(process.env.METRICS_STRICT ?? "");
 const apiHeaders = {
   Accept: "application/vnd.github+json",
   "User-Agent": `${username}-profile-metrics`,
@@ -9,12 +11,82 @@ const apiHeaders = {
   ...(token ? { Authorization: `Bearer ${token}` } : {}),
 };
 
-async function github(path) {
-  const response = await fetch(`https://api.github.com${path}`, { headers: apiHeaders });
-  if (!response.ok) {
-    throw new Error(`GitHub API ${response.status}: ${path}`);
+const degradations = [];
+
+function degrade(what, cause) {
+  const reason = cause instanceof Error ? cause.message : String(cause);
+  degradations.push(`${what}: ${reason}`);
+  console.warn(`warning: ${what}: ${reason}`);
+}
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function describeFailure(response) {
+  const rateLimitRemaining = response.headers.get("x-ratelimit-remaining");
+  const details = [`HTTP ${response.status} ${response.statusText}`.trim()];
+  if (rateLimitRemaining === "0") {
+    const reset = Number(response.headers.get("x-ratelimit-reset"));
+    details.push(
+      Number.isFinite(reset)
+        ? `rate limit exhausted, resets at ${new Date(reset * 1000).toISOString()}`
+        : "rate limit exhausted",
+    );
   }
-  return response.json();
+  try {
+    const body = await response.text();
+    const message = body ? (JSON.parse(body).message ?? body) : "";
+    if (message) {
+      details.push(String(message).slice(0, 200));
+    }
+  } catch {
+    // A body that is missing or not JSON adds nothing to the status-based message.
+  }
+  return details.join(" — ");
+}
+
+async function github(path, { attempts = 3 } = {}) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    let response;
+    try {
+      response = await fetch(`https://api.github.com${path}`, { headers: apiHeaders });
+    } catch (cause) {
+      lastError = new Error(`GitHub API request failed for ${path}: ${cause.message}`, { cause });
+      if (attempt === attempts) break;
+      await sleep(attempt * 1000);
+      continue;
+    }
+
+    if (response.ok) {
+      try {
+        return await response.json();
+      } catch (cause) {
+        throw new Error(`GitHub API returned an unreadable body for ${path}: ${cause.message}`, {
+          cause,
+        });
+      }
+    }
+
+    lastError = new Error(`GitHub API ${path} — ${await describeFailure(response)}`);
+    const retryable = response.status >= 500 || response.status === 429;
+    if (!retryable || attempt === attempts) break;
+    await sleep(attempt * 1000);
+  }
+  throw lastError;
+}
+
+async function optional(what, fallback, load) {
+  try {
+    return await load();
+  } catch (cause) {
+    if (strict) {
+      throw new Error(`${what} is unavailable and METRICS_STRICT is enabled: ${cause.message}`, {
+        cause,
+      });
+    }
+    degrade(what, cause);
+    return fallback;
+  }
 }
 
 const escapeXml = (value = "") =>
@@ -34,7 +106,7 @@ const truncate = (value, length) =>
 const [user, repositories, events] = await Promise.all([
   github(`/users/${username}`),
   github(`/users/${username}/repos?per_page=100&sort=updated`),
-  github(`/users/${username}/events/public?per_page=100`),
+  optional("public activity feed", [], () => github(`/users/${username}/events/public?per_page=100`)),
 ]);
 
 const ownedRepositories = repositories.filter(
@@ -42,13 +114,13 @@ const ownedRepositories = repositories.filter(
 );
 
 const languageResponses = await Promise.all(
-  ownedRepositories.slice(0, 20).map(async (repo) => {
-    try {
-      return await github(`/repos/${username}/${repo.name}/languages`);
-    } catch {
-      return {};
-    }
-  }),
+  ownedRepositories
+    .slice(0, 20)
+    .map((repo) =>
+      optional(`languages for ${repo.name}`, {}, () =>
+        github(`/repos/${username}/${repo.name}/languages`),
+      ),
+    ),
 );
 
 const languageTotals = {};
@@ -92,6 +164,7 @@ startDate.setUTCHours(0, 0, 0, 0);
 
 const activityByDate = new Map();
 for (const event of events) {
+  if (typeof event.created_at !== "string") continue;
   const day = event.created_at.slice(0, 10);
   activityByDate.set(day, (activityByDate.get(day) || 0) + 1);
 }
@@ -119,8 +192,8 @@ const activityLabels = {
 };
 
 const recentActivity = events.slice(0, 5).map((event) => ({
-  label: activityLabels[event.type] || event.type.replace(/Event$/, ""),
-  repo: event.repo.name.replace(`${username}/`, ""),
+  label: activityLabels[event.type] || String(event.type ?? "Activity").replace(/Event$/, ""),
+  repo: (event.repo?.name ?? "").replace(`${username}/`, ""),
   date: new Date(event.created_at).toLocaleDateString("en", { month: "short", day: "numeric" }),
 }));
 
@@ -128,16 +201,18 @@ const featured = [...ownedRepositories]
   .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
   .slice(0, 4);
 
-let avatarData = "";
-try {
-  const avatar = await fetch(user.avatar_url);
-  if (avatar.ok) {
-    const mime = avatar.headers.get("content-type") || "image/jpeg";
-    avatarData = `data:${mime};base64,${Buffer.from(await avatar.arrayBuffer()).toString("base64")}`;
+// The dashboard falls back to a monogram when the avatar cannot be embedded.
+const avatarData = await optional("avatar image", "", async () => {
+  if (!user.avatar_url) {
+    throw new Error("the profile has no avatar_url");
   }
-} catch {
-  // The dashboard still renders with a monogram when avatar download is unavailable.
-}
+  const avatar = await fetch(user.avatar_url);
+  if (!avatar.ok) {
+    throw new Error(`HTTP ${avatar.status} ${avatar.statusText}`.trim());
+  }
+  const mime = avatar.headers.get("content-type") || "image/jpeg";
+  return `data:${mime};base64,${Buffer.from(await avatar.arrayBuffer()).toString("base64")}`;
+});
 
 const statCard = (x, label, value, accent) => `
   <g transform="translate(${x} 76)">
@@ -282,3 +357,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" v
 await fs.mkdir("assets", { recursive: true });
 await fs.writeFile("assets/github-metrics.svg", svg.replace(/[ \t]+$/gm, ""));
 console.log(`Generated assets/github-metrics.svg for ${username}`);
+
+if (degradations.length > 0) {
+  console.warn(
+    `Dashboard generated with ${degradations.length} incomplete section(s):\n  - ${degradations.join("\n  - ")}`,
+  );
+}
