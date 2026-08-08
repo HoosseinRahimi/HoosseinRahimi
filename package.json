@@ -1,0 +1,15 @@
+{
+  "name": "hoosseinrahimi-profile",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GitHub profile README and the script that generates its metrics dashboard.",
+  "scripts": {
+    "metrics": "node scripts/generate-metrics.mjs",
+    "test": "node --test tests/",
+    "test:coverage": "node --test --experimental-test-coverage tests/"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
