@@ -45,6 +45,9 @@ My current toolkit is centred around:
       <a href="https://github.com/HoosseinRahimi/Bulldozer-price-prediction"><strong>Bulldozer Price Prediction</strong></a><br />
       A regression project with data preparation, feature engineering, and historical auction-price prediction.
       <br /><br />
+      <a href="https://github.com/hosseindamavandi/Fake-News-Detection"><strong>Fake News Detection</strong></a><br />
+      A collaborative machine-learning project for detecting fake news. Contributed code and repository updates as a project contributor.
+      <br /><br />
       <a href="https://github.com/HoosseinRahimi/Rat-in-maze"><strong>Rat in a Maze</strong></a><br />
       Pathfinding implementations using backtracking, A*, DFS, and BFS.
     </td>
