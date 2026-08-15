@@ -4,7 +4,7 @@
 
 ### Building practical tools across code, data, and networks
 
-Python developer · Machine learning learner · Algorithm enthusiast · Network engineer
+Python · Data & machine learning · Algorithms · Network engineering
 
 <a href="https://github.com/HoosseinRahimi">
   <img src="https://img.shields.io/badge/GitHub-HoosseinRahimi-181717?style=for-the-badge&logo=github" alt="GitHub profile" />
@@ -23,44 +23,52 @@ Python developer · Machine learning learner · Algorithm enthusiast · Network 
 
 ## About me
 
-I like turning technical ideas into working, understandable projects—from network topologies and routing labs to machine-learning experiments and algorithm visualisations.
+I build practical, documented projects across Python, data, algorithms, and computer networks. I care about making the result understandable and verifiable, not just getting a script to run once.
 
 My current toolkit is centred around:
-`Python` · `Jupyter` · `Pandas` · `scikit-learn` · `Cisco Packet Tracer` · `Git`
+`Python` · `Jupyter` · `Pandas` · `scikit-learn` · `Streamlit` · `GitHub Actions` · `Cisco Packet Tracer` · `Git`
 
 ## Featured work
 
 <table>
   <tr>
-    <td width="50%" valign="top">
-      <h3>🌐 Network engineering</h3>
+    <td width="34%" valign="top">
+      <h3>📊 Data & ML</h3>
+      <a href="https://github.com/HoosseinRahimi/airbnb-project"><strong>Amsterdam Airbnb Explorer</strong></a><br />
+      An interactive Streamlit dashboard for exploring Amsterdam listings by budget and distance, with an automated app health check.
+      <br /><br />
+      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection — NLP Contribution</strong></a><br />
+      My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
+      <small>Team repository: <a href="https://github.com/hosseindamavandi/Fake-News-Detection">Fake News Detection</a></small>
+      <br /><br />
+      <a href="https://github.com/HoosseinRahimi/Bulldozer-price-prediction"><strong>Bulldozer Price Prediction</strong></a><br />
+      A regression project with data preparation, feature engineering, and historical auction-price prediction.
+    </td>
+    <td width="33%" valign="top">
+      <h3>🧠 Algorithms</h3>
+      <a href="https://github.com/HoosseinRahimi/Rat-in-maze"><strong>Rat in a Maze</strong></a><br />
+      Tested pathfinding implementations using BFS, A*, DFS, and backtracking, with automated regression checks.
+      <br /><br />
+      <a href="https://github.com/HoosseinRahimi/kosaraju-algorithm"><strong>Kosaraju SCC</strong></a><br />
+      An iterative implementation of Kosaraju's algorithm supporting arbitrary vertex IDs, with automated tests.
+    </td>
+    <td width="33%" valign="top">
+      <h3>🌐 Networks</h3>
       <a href="https://github.com/HoosseinRahimi/university-network"><strong>University Network</strong></a><br />
       A repaired and validated Cisco Packet Tracer campus network with VLANs, DHCP, wireless, DNS, NAT, and end-to-end connectivity checks.
       <br /><br />
       <a href="https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design"><strong>CCNA Complex Network Design</strong></a><br />
       A practical multi-service topology covering VLANs, routing, NAT, DHCP, ACLs, and server integration.
     </td>
-    <td width="50%" valign="top">
-      <h3>🤖 Python & machine learning</h3>
-      <a href="https://github.com/HoosseinRahimi/Bulldozer-price-prediction"><strong>Bulldozer Price Prediction</strong></a><br />
-      A regression project with data preparation, feature engineering, and historical auction-price prediction.
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection — NLP Contribution</strong></a><br />
-      My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
-      <small>Team repository: <a href="https://github.com/hosseindamavandi/Fake-News-Detection">Fake News Detection</a></small>
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/Rat-in-maze"><strong>Rat in a Maze</strong></a><br />
-      Pathfinding implementations using backtracking, A*, DFS, and BFS.
-    </td>
   </tr>
 </table>
 
-## What I’m exploring
+## Engineering focus
 
-- Building reliable, well-documented technical projects
-- Applying machine learning to practical datasets
-- Designing and troubleshooting real-world networks
-- Improving algorithmic thinking through implementation
+- Building reproducible and well-documented Python projects
+- Applying data analysis and machine learning to practical datasets
+- Testing algorithm implementations and documenting correctness
+- Designing and troubleshooting real-world network topologies
 
 ## Find me
 
