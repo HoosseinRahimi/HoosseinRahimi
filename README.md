@@ -35,7 +35,8 @@ My current toolkit is centred around:
     <td width="34%" valign="top">
       <h3>📊 Data & ML</h3>
       <a href="https://github.com/HoosseinRahimi/airbnb-project"><strong>Amsterdam Airbnb Explorer</strong></a><br />
-      An interactive Streamlit dashboard for exploring Amsterdam listings by budget and distance, with an automated app health check.
+      An interactive Streamlit dashboard for exploring Amsterdam listings by budget and distance, with an automated app health check.<br />
+      <strong><a href="https://amsterdam-airbnb-explorer.streamlit.app/">▶ Live Demo</a></strong>
       <br /><br />
       <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection — NLP Contribution</strong></a><br />
       My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
