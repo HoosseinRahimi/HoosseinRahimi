@@ -45,8 +45,9 @@ My current toolkit is centred around:
       <a href="https://github.com/HoosseinRahimi/Bulldozer-price-prediction"><strong>Bulldozer Price Prediction</strong></a><br />
       A regression project with data preparation, feature engineering, and historical auction-price prediction.
       <br /><br />
-      <a href="https://github.com/hosseindamavandi/Fake-News-Detection"><strong>Fake News Detection</strong></a><br />
-      A collaborative machine-learning project for detecting fake news. Contributed code and repository updates as a project contributor.
+      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection — NLP Contribution</strong></a><br />
+      My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
+      <small>Team repository: <a href="https://github.com/hosseindamavandi/Fake-News-Detection">Fake News Detection</a></small>
       <br /><br />
       <a href="https://github.com/HoosseinRahimi/Rat-in-maze"><strong>Rat in a Maze</strong></a><br />
       Pathfinding implementations using backtracking, A*, DFS, and BFS.
