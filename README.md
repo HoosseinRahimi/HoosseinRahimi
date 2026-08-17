@@ -4,7 +4,7 @@
 
 ### Building practical tools across code, data, and networks
 
-Python · Data & machine learning · Algorithms · Network engineering
+Python · TypeScript · AI & data · Algorithms · Network engineering
 
 <a href="https://github.com/HoosseinRahimi">
   <img src="https://img.shields.io/badge/GitHub-HoosseinRahimi-181717?style=for-the-badge&logo=github" alt="GitHub profile" />
@@ -23,22 +23,25 @@ Python · Data & machine learning · Algorithms · Network engineering
 
 ## About me
 
-I build practical, documented projects across Python, data, algorithms, and computer networks. I care about making the result understandable and verifiable, not just getting a script to run once.
+I build practical, documented projects across full-stack AI, Python, data, algorithms, and computer networks. I care about making the result understandable and verifiable, not just getting a script to run once.
 
 My current toolkit is centred around:
-`Python` · `Jupyter` · `Pandas` · `scikit-learn` · `Streamlit` · `GitHub Actions` · `Cisco Packet Tracer` · `Git`
+`Python` · `TypeScript` · `React` · `Node.js` · `Docker` · `Jupyter` · `Pandas` · `scikit-learn` · `Streamlit` · `GitHub Actions` · `Cisco Packet Tracer` · `Git`
 
 ## Featured work
 
 <table>
   <tr>
     <td width="34%" valign="top">
-      <h3>📊 Data & ML</h3>
+      <h3>🤖 AI & Data</h3>
+      <a href="https://github.com/HoosseinRahimi/ai-channel-publisher"><strong>AI Channel Publisher</strong></a><br />
+      A self-hosted full-stack AI publishing system with React, tRPC/Express, MySQL/Drizzle, OpenAI-compatible models, Telegram delivery, scheduled draft review, encrypted credentials, and engagement analytics.
+      <br /><br />
       <a href="https://github.com/HoosseinRahimi/airbnb-project"><strong>Amsterdam Airbnb Explorer</strong></a><br />
       An interactive Streamlit dashboard for exploring Amsterdam listings by budget and distance, with an automated app health check.<br />
       <strong><a href="https://amsterdam-airbnb-explorer.streamlit.app/">▶ Live Demo</a></strong>
       <br /><br />
-      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection — NLP Contribution</strong></a><br />
+      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection - NLP Contribution</strong></a><br />
       My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
       <small>Team repository: <a href="https://github.com/hosseindamavandi/Fake-News-Detection">Fake News Detection</a></small>
       <br /><br />
@@ -66,7 +69,8 @@ My current toolkit is centred around:
 
 ## Engineering focus
 
-- Building reproducible and well-documented Python projects
+- Building production-style full-stack AI systems with clear operational boundaries
+- Building reproducible and well-documented Python and TypeScript projects
 - Applying data analysis and machine learning to practical datasets
 - Testing algorithm implementations and documenting correctness
 - Designing and troubleshooting real-world network topologies
@@ -80,6 +84,6 @@ My current toolkit is centred around:
 
 <br />
 
-<i>Thanks for stopping by — feel free to explore the projects.</i>
+<i>Thanks for stopping by - feel free to explore the projects.</i>
 
 </div>
