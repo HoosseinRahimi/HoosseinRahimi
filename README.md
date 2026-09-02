@@ -2,15 +2,15 @@
 
 # Hossein Rahimi
 
-### Building practical tools across code, data, and networks
+### Building AI-native systems, developer tools, and reliable infrastructure
 
-Python · TypeScript · AI & data · Algorithms · Network engineering
+**Python · TypeScript · AI Engineering · Full-Stack · Networks · Security**
 
-<a href="https://github.com/HoosseinRahimi">
-  <img src="https://img.shields.io/badge/GitHub-HoosseinRahimi-181717?style=for-the-badge&logo=github" alt="GitHub profile" />
-</a>
 <a href="https://github.com/HoosseinRahimi?tab=repositories">
-  <img src="https://img.shields.io/badge/Projects-Browse%20repositories-2f81f7?style=for-the-badge&logo=github" alt="Browse projects" />
+  <img src="https://img.shields.io/badge/Explore-Projects-2f81f7?style=for-the-badge&logo=github&logoColor=white" alt="Explore projects" />
+</a>
+<a href="https://hoosseinrahimi.github.io/ForgeFlow-AI/">
+  <img src="https://img.shields.io/badge/Live-ForgeFlow%20AI-6f42c1?style=for-the-badge&logo=githubpages&logoColor=white" alt="ForgeFlow AI live showcase" />
 </a>
 
 </div>
@@ -21,76 +21,103 @@ Python · TypeScript · AI & data · Algorithms · Network engineering
   <img width="100%" alt="Hossein Rahimi's GitHub activity dashboard" src="./assets/github-metrics.svg" />
 </picture>
 
-## About me
+## 👋 About me
 
-I build practical, documented projects across full-stack AI, Python, data, algorithms, and computer networks. I care about making the result understandable and verifiable, not just getting a script to run once.
+I build practical software where **AI, automation, data, and infrastructure** meet.
 
-My current toolkit is centred around:
-`Python` · `TypeScript` · `React` · `Node.js` · `Docker` · `Jupyter` · `Pandas` · `scikit-learn` · `Streamlit` · `GitHub Actions` · `Cisco Packet Tracer` · `Git`
+My projects range from AI-native project operations and automated publishing systems to machine-learning experiments, algorithms, and computer-network labs. I care about systems that are understandable, testable, reproducible, and useful outside a notebook or one-off demo.
 
-## Current work
+Right now I am especially focused on:
 
-- [Team Project Platform](https://github.com/HoosseinRahimi/team-project) — a role-aware student/professor project platform with authentication, project integration, review workflows, submission gates, CI, security checks, and release packaging.
-- [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher) — a self-hosted AI publishing system with React, tRPC/Express, scheduled publishing, encrypted credentials, and engagement analytics.
+- 🤖 AI-assisted engineering and project operations
+- 🧩 Production-style full-stack systems
+- 🔐 Security and network engineering
+- ⚙️ Automation, testing, CI, and reliable developer workflows
+- 📊 Applied data and machine learning
 
-If one of these projects is useful to you, a ⭐ helps other developers discover it too.
+## 🚀 What I'm building
 
-## Featured work
+### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI)
 
-<table>
-  <tr>
-    <td width="34%" valign="top">
-      <h3>🤖 AI & Data</h3>
-      <a href="https://github.com/HoosseinRahimi/ai-channel-publisher"><strong>AI Channel Publisher</strong></a><br />
-      A self-hosted full-stack AI publishing system with React, tRPC/Express, MySQL/Drizzle, OpenAI-compatible models, Telegram delivery, scheduled draft review, encrypted credentials, and engagement analytics.
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/airbnb-project"><strong>Amsterdam Airbnb Explorer</strong></a><br />
-      An interactive Streamlit dashboard for exploring Amsterdam listings by budget and distance, with an automated app health check.<br />
-      <strong><a href="https://amsterdam-airbnb-explorer.streamlit.app/">▶ Live Demo</a></strong>
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/fake-news-detection-nlp"><strong>Fake News Detection - NLP Contribution</strong></a><br />
-      My NLP and CNN experimentation for a collaborative fake-news detection project, including text preprocessing and optimizer comparisons.<br />
-      <small>Team repository: <a href="https://github.com/hosseindamavandi/Fake-News-Detection">Fake News Detection</a></small>
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/Bulldozer-price-prediction"><strong>Bulldozer Price Prediction</strong></a><br />
-      A regression project with data preparation, feature engineering, and historical auction-price prediction.
-    </td>
-    <td width="33%" valign="top">
-      <h3>🧠 Algorithms</h3>
-      <a href="https://github.com/HoosseinRahimi/Rat-in-maze"><strong>Rat in a Maze</strong></a><br />
-      Tested pathfinding implementations using BFS, A*, DFS, and backtracking, with automated regression checks.
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/kosaraju-algorithm"><strong>Kosaraju SCC</strong></a><br />
-      An iterative implementation of Kosaraju's algorithm supporting arbitrary vertex IDs, with automated tests.
-    </td>
-    <td width="33%" valign="top">
-      <h3>🌐 Networks</h3>
-      <a href="https://github.com/HoosseinRahimi/university-network"><strong>University Network</strong></a><br />
-      A repaired and validated Cisco Packet Tracer campus network with VLANs, DHCP, wireless, DNS, NAT, and end-to-end connectivity checks.
-      <br /><br />
-      <a href="https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design"><strong>CCNA Complex Network Design</strong></a><br />
-      A practical multi-service topology covering VLANs, routing, NAT, DHCP, ACLs, and server integration.
-    </td>
-  </tr>
-</table>
+**AI-native project operations for software teams.**
 
-## Engineering focus
+A privacy-safe Community Edition of a larger project-management and repository-intelligence platform, with a React cockpit, FastAPI backend, public-document retrieval, deterministic debugging assistance, governed AI actions, Docker deployment, and CI validation.
 
-- Building production-style full-stack AI systems with clear operational boundaries
-- Building reproducible and well-documented Python and TypeScript projects
-- Applying data analysis and machine learning to practical datasets
-- Testing algorithm implementations and documenting correctness
-- Designing and troubleshooting real-world network topologies
+**[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)** · [Repository](https://github.com/HoosseinRahimi/ForgeFlow-AI)
 
-## Find me
+### 📡 [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)
+
+A self-hosted AI publishing platform for Telegram channels. It collects stories, generates editable multilingual drafts using OpenAI-compatible models, supports review-first scheduling, publishes through Telegram, and tracks engagement.
+
+Built with **React, TypeScript, tRPC, Express, MySQL/Drizzle, Docker, Telegram APIs, and LLM integrations**.
+
+### 🧭 [Team Project](https://github.com/HoosseinRahimi/team-project)
+
+An early-stage collaborative university project platform built as a modular monolith with **React + TypeScript, FastAPI, SQLite, Git-tracked shared data, Docker, tests, and CI**.
+
+The current stable phase includes per-user dashboards, activity management, calendar views, timeline history, project links, and dashboard statistics.
+
+## 🧰 Tech stack
 
 <div align="center">
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/HoosseinRahimi)
-[![Repositories](https://img.shields.io/badge/Repositories-2f81f7?style=flat-square&logo=github&logoColor=white)](https://github.com/HoosseinRahimi?tab=repositories)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+
+</div>
+
+**AI & Data:** LLM integrations · OpenAI-compatible APIs · Pandas · scikit-learn · Jupyter · Streamlit  
+**Backend:** FastAPI · Express · tRPC · REST APIs · SQLite · MySQL · Drizzle ORM  
+**Frontend:** React · TypeScript · Vite  
+**Infrastructure:** Docker · Docker Compose · GitHub Actions · Linux · Git  
+**Networks:** TCP/IP · VLANs · routing · NAT · DHCP · ACLs · Cisco Packet Tracer
+
+## 🧪 Selected projects
+
+| Project | Focus |
+| --- | --- |
+| [🌐 University Network](https://github.com/HoosseinRahimi/university-network) | Campus networking, VLANs, DHCP, wireless, DNS, NAT, troubleshooting |
+| [🛰️ CCNA Complex Network Design](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design) | Routing, switching, NAT, DHCP, ACLs, integrated network services |
+| [🏠 Amsterdam Airbnb Explorer](https://github.com/HoosseinRahimi/airbnb-project) | Streamlit data exploration and interactive filtering |
+| [📰 Fake News Detection](https://github.com/HoosseinRahimi/fake-news-detection-nlp) | NLP preprocessing, CNN experiments, optimizer comparisons |
+| [🚜 Bulldozer Price Prediction](https://github.com/HoosseinRahimi/Bulldozer-price-prediction) | Regression, feature engineering, historical price prediction |
+| [🐀 Rat in a Maze](https://github.com/HoosseinRahimi/Rat-in-maze) | BFS, DFS, A*, backtracking, regression testing |
+| [🧠 Kosaraju SCC](https://github.com/HoosseinRahimi/kosaraju-algorithm) | Graph algorithms and strongly connected components |
+| [🐍 Python Mastery](https://github.com/HoosseinRahimi/python-mastery) | Python practice and deeper language fundamentals |
+
+## 🎯 Engineering direction
+
+```text
+AI-native products
+      +
+software engineering
+      +
+security & networks
+      +
+automation / reliability
+      ↓
+practical systems that can be tested, operated, and improved
+```
+
+I am interested in building systems that do more than generate output: they should expose their state, enforce boundaries, survive bad inputs, and make debugging possible.
+
+## 📍 Find me on GitHub
+
+<div align="center">
+
+[![Profile](https://img.shields.io/badge/GitHub-HoosseinRahimi-181717?style=for-the-badge&logo=github)](https://github.com/HoosseinRahimi)
+[![Repositories](https://img.shields.io/badge/Public-Repositories-2f81f7?style=for-the-badge&logo=github)](https://github.com/HoosseinRahimi?tab=repositories)
 
 <br />
 
-<i>Thanks for stopping by - feel free to explore the projects.</i>
+<sub>Build → test → break → debug → improve → repeat.</sub>
 
 </div>
