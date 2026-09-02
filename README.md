@@ -28,6 +28,13 @@ I build practical, documented projects across full-stack AI, Python, data, algor
 My current toolkit is centred around:
 `Python` · `TypeScript` · `React` · `Node.js` · `Docker` · `Jupyter` · `Pandas` · `scikit-learn` · `Streamlit` · `GitHub Actions` · `Cisco Packet Tracer` · `Git`
 
+## Current work
+
+- [Team Project Platform](https://github.com/HoosseinRahimi/team-project) — a role-aware student/professor project platform with authentication, project integration, review workflows, submission gates, CI, security checks, and release packaging.
+- [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher) — a self-hosted AI publishing system with React, tRPC/Express, scheduled publishing, encrypted credentials, and engagement analytics.
+
+If one of these projects is useful to you, a ⭐ helps other developers discover it too.
+
 ## Featured work
 
 <table>
