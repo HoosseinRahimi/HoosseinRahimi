@@ -37,6 +37,16 @@ Right now I am especially focused on:
 
 ## 🚀 What I'm building
 
+### 🇩🇪 [Deutsch Rah](https://github.com/HoosseinRahimi/deutsch-rah-showcase)
+
+**Bilingual German learning for Persian speakers.**
+
+Deutsch Rah turns a learner’s goal into a structured path from A1 to C2, combining Persian explanations, vocabulary, verb practice, reading, listening, writing, speaking, progress tracking, and adaptive learning tools.
+
+**[▶ Live website](https://deutsch-rah.vercel.app/)** · [Showcase](https://github.com/HoosseinRahimi/deutsch-rah-showcase) · [Source](https://github.com/HoosseinRahimi/Deutsch_rah)
+
+The current platform includes 204 German verbs, 192 vocabulary cards, 612 generated verb exercises, 864 skills tasks, and more than 1,350 sentence-structure exercises across A1–C2.
+
 ### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI)
 
 **AI-native project operations for software teams.**
