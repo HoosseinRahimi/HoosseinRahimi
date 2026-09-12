@@ -64,23 +64,23 @@
 
   <g transform="translate(224 382)">
     <rect class="card" width="164" height="80" rx="12"/>
-    <text class="link label" x="14" y="24">deutsch-rah-showcase</text>
-    <text class="muted tiny" x="14" y="45">Showcase for Deutsch Rah, …</text>
+    <text class="link label" x="14" y="24">skills-introduction-t…</text>
+    <text class="muted tiny" x="14" y="45">My clone repository</text>
     <text class="muted tiny" x="14" y="65">★ 0   ⑂ 0</text>
   </g>
 
   <g transform="translate(48 474)">
     <rect class="card" width="164" height="80" rx="12"/>
-    <text class="link label" x="14" y="24">executive-business-po…</text>
-    <text class="muted tiny" x="14" y="45">GitHub project</text>
+    <text class="link label" x="14" y="24">deutsch-rah-showcase</text>
+    <text class="muted tiny" x="14" y="45">Showcase for Deutsch Rah, …</text>
     <text class="muted tiny" x="14" y="65">★ 0   ⑂ 0</text>
   </g>
 
   <g transform="translate(224 474)">
     <rect class="card" width="164" height="80" rx="12"/>
-    <text class="link label" x="14" y="24">ForgeFlow-AI</text>
+    <text class="link label" x="14" y="24">executive-business-po…</text>
     <text class="muted tiny" x="14" y="45">GitHub project</text>
-    <text class="muted tiny" x="14" y="65">★ 0   ⑂ 1</text>
+    <text class="muted tiny" x="14" y="65">★ 0   ⑂ 0</text>
   </g>
 
   <text class="heading" x="454" y="49">GitHub metrics</text>
@@ -110,7 +110,7 @@
   <g transform="translate(1018 76)">
     <rect class="card" width="176" height="72" rx="12"/>
     <circle cx="24" cy="24" r="5" fill="#3fb950"/>
-    <text class="stat" x="18" y="51">57</text>
+    <text class="stat" x="18" y="51">58</text>
     <text class="muted small" x="70" y="29">Public events</text>
   </g>
 
@@ -296,7 +296,7 @@
 <rect class="level-0" x="768" y="226" width="9" height="9" rx="2"><title>2026-09-09: 0 public events</title></rect>
 <rect class="level-0" x="768" y="238" width="9" height="9" rx="2"><title>2026-09-10: 0 public events</title></rect>
 <rect class="level-1" x="768" y="250" width="9" height="9" rx="2"><title>2026-09-11: 1 public events</title></rect>
-<rect class="level-1" x="768" y="262" width="9" height="9" rx="2"><title>2026-09-12: 1 public events</title></rect>
+<rect class="level-1" x="768" y="262" width="9" height="9" rx="2"><title>2026-09-12: 2 public events</title></rect>
   <text class="muted tiny" x="468" y="292">Less</text>
   <rect class="level-0" x="500" y="283" width="9" height="9" rx="2"/>
   <rect class="level-1" x="513" y="283" width="9" height="9" rx="2"/>
@@ -354,12 +354,12 @@
       <circle cx="824" cy="434" r="5" fill="#2f81f7"/>
       <text class="label small" x="840" y="432">Pushed commits</text>
       <text class="muted tiny" x="840" y="450">HoosseinRahimi</text>
-      <text class="muted tiny end" x="1214" y="440">Sep 11</text>
+      <text class="muted tiny end" x="1214" y="440">Sep 12</text>
 
       <circle cx="824" cy="476" r="5" fill="#2f81f7"/>
       <text class="label small" x="840" y="474">Pushed commits</text>
-      <text class="muted tiny" x="840" y="492">executive-business-portfolio</text>
-      <text class="muted tiny end" x="1214" y="482">Sep 8</text>
+      <text class="muted tiny" x="840" y="492">HoosseinRahimi</text>
+      <text class="muted tiny end" x="1214" y="482">Sep 11</text>
 
       <circle cx="824" cy="518" r="5" fill="#2f81f7"/>
       <text class="label small" x="840" y="516">Pushed commits</text>
