@@ -1,5 +1,29 @@
 const DAYS_IN_HEATMAP = 182;
 const MILLISECONDS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+const strict = /^(1|true|yes)$/i.test(process.env.METRICS_STRICT ?? "");
+const degradations = [];
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const degrade = (what, cause) => {
+  const reason = cause instanceof Error ? cause.message : String(cause);
+  degradations.push(`${what}: ${reason}`);
+  console.warn(`warning: ${what}: ${reason}`);
+};
+
+const optional = async (what, fallback, load) => {
+  try {
+    return await load();
+  } catch (cause) {
+    if (strict) {
+      throw new Error(`${what} is unavailable and METRICS_STRICT is enabled: ${cause.message}`, {
+        cause,
+      });
+    }
+    degrade(what, cause);
+    return fallback;
+  }
+};
 
 export const languageColors = {
   Python: "#3572A5",
@@ -31,12 +55,36 @@ export const buildApiHeaders = (username, token) => ({
 });
 
 export const createGitHubClient = ({ headers, fetchImpl = fetch }) =>
-  async function github(path) {
-    const response = await fetchImpl(`https://api.github.com${path}`, { headers });
-    if (!response.ok) {
-      throw new Error(`GitHub API ${response.status}: ${path}`);
+  async function github(path, { attempts = 3 } = {}) {
+    let lastError;
+    for (let attempt = 1; attempt <= attempts; attempt += 1) {
+      let response;
+      try {
+        const options = { headers };
+        if (fetchImpl === fetch && typeof AbortSignal?.timeout === "function") {
+          options.signal = AbortSignal.timeout(30_000);
+        }
+        response = await fetchImpl(`https://api.github.com${path}`, options);
+      } catch (cause) {
+        lastError = new Error(`GitHub API request failed for ${path}: ${cause.message}`, { cause });
+        if (attempt === attempts) break;
+        await sleep(attempt * 1000);
+        continue;
+      }
+      if (response.ok) {
+        try {
+          return await response.json();
+        } catch (cause) {
+          throw new Error(`GitHub API returned an unreadable body for ${path}: ${cause.message}`, {
+            cause,
+          });
+        }
+      }
+      lastError = new Error(`GitHub API ${response.status}: ${path}`);
+      if ((response.status < 500 && response.status !== 429) || attempt === attempts) break;
+      await sleep(attempt * 1000);
     }
-    return response.json();
+    throw lastError;
   };
 
 export const escapeXml = (value = "") =>
@@ -88,6 +136,7 @@ export const accountAgeInYears = (createdAt, now = new Date()) =>
 export const countEventsByDate = (events) => {
   const activityByDate = new Map();
   for (const event of events) {
+    if (typeof event.created_at !== "string") continue;
     const day = event.created_at.slice(0, 10);
     activityByDate.set(day, (activityByDate.get(day) || 0) + 1);
   }
@@ -114,8 +163,8 @@ export const buildHeatmap = (events, now = new Date()) => {
 
 export const summariseRecentActivity = (events, username, limit = 5) =>
   events.slice(0, limit).map((event) => ({
-    label: activityLabels[event.type] || event.type.replace(/Event$/, ""),
-    repo: event.repo.name.replace(`${username}/`, ""),
+    label: activityLabels[event.type] || String(event.type ?? "Activity").replace(/Event$/, ""),
+    repo: (event.repo?.name ?? "").replace(`${username}/`, ""),
     date: new Date(event.created_at).toLocaleDateString("en", { month: "short", day: "numeric" }),
   }));
 
@@ -303,11 +352,9 @@ export const stripTrailingWhitespace = (svg) => svg.replace(/[ \t]+$/gm, "");
 export const fetchLanguageTotals = async (github, username, repositories, limit = 20) => {
   const languageResponses = await Promise.all(
     repositories.slice(0, limit).map(async (repo) => {
-      try {
-        return await github(`/repos/${username}/${repo.name}/languages`);
-      } catch {
-        return {};
-      }
+      return optional(`languages for ${repo.name}`, {}, () =>
+        github(`/repos/${username}/${repo.name}/languages`),
+      );
     }),
   );
   return sumLanguageBytes(languageResponses);
@@ -331,7 +378,9 @@ export const collectMetrics = async ({ username, github, fetchImpl = fetch }) =>
   const [user, repositories, events] = await Promise.all([
     github(`/users/${username}`),
     github(`/users/${username}/repos?per_page=100&sort=updated`),
-    github(`/users/${username}/events/public?per_page=100`),
+    optional("public activity feed", [], () =>
+      github(`/users/${username}/events/public?per_page=100`),
+    ),
   ]);
 
   const ownedRepositories = filterOwnedRepositories(repositories, username);
