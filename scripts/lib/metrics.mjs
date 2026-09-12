@@ -128,7 +128,7 @@ export const rankLanguages = (languageTotals, limit = 6) => {
 };
 
 export const sumBy = (repositories, key) =>
-  repositories.reduce((sum, repo) => sum + repo[key], 0);
+  repositories.reduce((sum, repo) => sum + (Number(repo[key]) || 0), 0);
 
 export const accountAgeInYears = (createdAt, now = new Date()) =>
   Math.max(1, Math.floor((now.getTime() - new Date(createdAt).getTime()) / MILLISECONDS_PER_YEAR));
@@ -192,7 +192,7 @@ const repoCard = (repo, index) => {
     <rect class="card" width="164" height="80" rx="12"/>
     <text class="link label" x="14" y="24">${escapeXml(truncate(repo.name, 22))}</text>
     <text class="muted tiny" x="14" y="45">${escapeXml(truncate(repo.description || "GitHub project", 27))}</text>
-    <text class="muted tiny" x="14" y="65">★ ${repo.stargazers_count}   ⑂ ${repo.forks_count}</text>
+    <text class="muted tiny" x="14" y="65">★ ${Number(repo.stargazers_count) || 0}   ⑂ ${Number(repo.forks_count) || 0}</text>
   </g>`;
 };
 
@@ -304,7 +304,7 @@ export const renderDashboard = ({
   <text class="title" x="196" y="79">${escapeXml(user.name || user.login)}</text>
   <text class="link label" x="196" y="103">@${escapeXml(user.login)}</text>
   <text class="muted small" x="196" y="128">On GitHub for ${accountYears}+ years</text>
-  <text class="muted small" x="196" y="150">${user.followers} followers · ${user.following} following</text>
+  <text class="muted small" x="196" y="150">${Number(user.followers) || 0} followers · ${Number(user.following) || 0} following</text>
 
   <text class="heading" x="48" y="226">Building practical systems</text>
   <text class="muted small" x="48" y="251">Python, machine learning, algorithms,</text>
@@ -321,7 +321,7 @@ export const renderDashboard = ({
 
   <text class="heading" x="454" y="49">GitHub metrics</text>
   <text class="muted tiny end" x="1216" y="47">Updated ${now.toISOString().slice(0, 10)}</text>
-  ${statCard(454, "Public repositories", user.public_repos, "#2f81f7")}
+  ${statCard(454, "Public repositories", Number(user.public_repos) || 0, "#2f81f7")}
   ${statCard(642, "Stars received", compact(totalStars), "#e3b341")}
   ${statCard(830, "Repository forks", compact(totalForks), "#a371f7")}
   ${statCard(1018, "Public events", events.length, "#3fb950")}
@@ -353,7 +353,7 @@ export const fetchLanguageTotals = async (github, username, repositories, limit 
   const languageResponses = await Promise.all(
     repositories.slice(0, limit).map(async (repo) => {
       return optional(`languages for ${repo.name}`, {}, () =>
-        github(`/repos/${username}/${repo.name}/languages`),
+        github(`/repos/${encodeURIComponent(username)}/${encodeURIComponent(repo.name)}/languages`),
       );
     }),
   );
@@ -362,12 +362,27 @@ export const fetchLanguageTotals = async (github, username, repositories, limit 
 
 export const fetchAvatarDataUri = async (avatarUrl, fetchImpl = fetch) => {
   try {
-    const avatar = await fetchImpl(avatarUrl);
+    if (fetchImpl === fetch) {
+      const parsedUrl = new URL(avatarUrl);
+      if (parsedUrl.protocol !== "https:" || !parsedUrl.hostname.endsWith(".githubusercontent.com")) {
+        throw new Error(`Unexpected avatar host: ${parsedUrl.hostname}`);
+      }
+    }
+    const options = {};
+    if (fetchImpl === fetch && typeof AbortSignal?.timeout === "function") {
+      options.signal = AbortSignal.timeout(15_000);
+    }
+    const avatar = await fetchImpl(avatarUrl, options);
     if (!avatar.ok) {
       return "";
     }
-    const mime = avatar.headers.get("content-type") || "image/jpeg";
-    return `data:${mime};base64,${Buffer.from(await avatar.arrayBuffer()).toString("base64")}`;
+    const mime = (avatar.headers.get("content-type") || "image/jpeg").split(";")[0].trim().toLowerCase();
+    const bytes = Buffer.from(await avatar.arrayBuffer());
+    const allowedTypes = new Set(["image/png", "image/jpeg", "image/gif", "image/webp"]);
+    if (!allowedTypes.has(mime) || bytes.byteLength > 2 * 1024 * 1024) {
+      return "";
+    }
+    return `data:${mime};base64,${bytes.toString("base64")}`;
   } catch {
     // The dashboard still renders with a monogram when avatar download is unavailable.
     return "";
@@ -376,10 +391,10 @@ export const fetchAvatarDataUri = async (avatarUrl, fetchImpl = fetch) => {
 
 export const collectMetrics = async ({ username, github, fetchImpl = fetch }) => {
   const [user, repositories, events] = await Promise.all([
-    github(`/users/${username}`),
-    github(`/users/${username}/repos?per_page=100&sort=updated`),
+    github(`/users/${encodeURIComponent(username)}`),
+    github(`/users/${encodeURIComponent(username)}/repos?per_page=100&sort=updated`),
     optional("public activity feed", [], () =>
-      github(`/users/${username}/events/public?per_page=100`),
+      github(`/users/${encodeURIComponent(username)}/events/public?per_page=100`),
     ),
   ]);
 
