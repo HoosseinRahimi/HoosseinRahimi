@@ -17,6 +17,10 @@
 
 <br />
 
+<p align="center">
+  <img src="./assets/github-profile-banner.png" alt="AI engineering and developer tools" width="100%" />
+</p>
+
 <picture>
   <img width="100%" alt="Hossein Rahimi's GitHub activity dashboard" src="./assets/github-metrics.svg" />
 </picture>
@@ -33,6 +37,14 @@ Right now I am especially focused on:
 - 🧩 Production-style full-stack systems
 - 🔐 Security and network engineering
 - ⚙️ Automation, testing, CI, and reliable developer workflows
+
+## 🖼️ Visual portfolio
+
+<p align="center">
+  <img src="./assets/portfolio-case-study-cover.png" alt="AI, automation, APIs, OCR, and network engineering portfolio" width="100%" />
+</p>
+
+Profile assets: [X banner](./assets/x-profile-banner.png) · [Telegram avatar](./assets/telegram-agent-avatar.png) · [Resume header](./assets/resume-header.png) · [Website OG image](./assets/website-og-image.png) · [Tutorial thumbnail](./assets/technical-tutorial-thumbnail.png) · [Email signature](./assets/email-signature-banner.png)
 - 📊 Applied data and machine learning
 
 ## 🚀 What I'm building
