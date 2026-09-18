@@ -2,9 +2,9 @@
 
 # Hossein Rahimi
 
-### Building AI-native systems, developer tools, and reliable infrastructure
+### Building AI-native products, developer tools, and reliable infrastructure
 
-**Python · TypeScript · AI Engineering · Full-Stack · Networks · Security**
+**Python · TypeScript · AI Engineering · Full-Stack · Security · Networks**
 
 <a href="https://github.com/HoosseinRahimi?tab=repositories">
   <img src="https://img.shields.io/badge/Explore-Projects-2f81f7?style=for-the-badge&logo=github&logoColor=white" alt="Explore projects" />
@@ -29,55 +29,41 @@
 
 I build practical software where **AI, automation, data, and infrastructure** meet.
 
-My projects range from AI-native project operations and automated publishing systems to machine-learning experiments, algorithms, and computer-network labs. I care about systems that are understandable, testable, reproducible, and useful outside a notebook or one-off demo.
-
-Right now I am especially focused on:
-
-- 🤖 AI-assisted engineering and project operations
-- 🧩 Production-style full-stack systems
-- 🔐 Security and network engineering
-- ⚙️ Automation, testing, CI, and reliable developer workflows
-
-## 🖼️ Visual portfolio
-
-<p align="center">
-  <img src="./assets/portfolio-case-study-cover.png" alt="AI, automation, APIs, OCR, and network engineering portfolio" width="100%" />
-</p>
-
-Profile assets: [X banner](./assets/x-profile-banner.png) · [Telegram avatar](./assets/telegram-agent-avatar.png) · [Resume header](./assets/resume-header.png) · [Website OG image](./assets/website-og-image.png) · [Tutorial thumbnail](./assets/technical-tutorial-thumbnail.png) · [Email signature](./assets/email-signature-banner.png)
-- 📊 Applied data and machine learning
+I care about systems that are understandable, testable, reproducible, and useful outside a notebook or one-off demo. My current work spans AI-assisted products, safety-first automation, full-stack platforms, applied data, and network engineering.
 
 ## 🚀 What I'm building
 
-### 🇩🇪 [Deutsch Rah](https://github.com/HoosseinRahimi/deutsch-rah-showcase)
+### 🩺 [Health, Focus & Lifestyle Assistant](https://github.com/HoosseinRahimi/health-lifestyle-assistant)
 
-**Bilingual German learning for Persian speakers.**
+A cross-platform health and focus system with Android and Windows clients, a backend API, an admin console, local-first synchronization, and deterministic safety rules for medication workflows.
 
-Deutsch Rah turns a learner’s goal into a structured path from A1 to C2, combining Persian explanations, vocabulary, verb practice, reading, listening, writing, speaking, progress tracking, and adaptive learning tools.
+### 🛡️ [Trading Desk](https://github.com/HoosseinRahimi/trading-desk)
 
-**[▶ Live website](https://deutsch-rah.vercel.app/)** · [Showcase](https://github.com/HoosseinRahimi/deutsch-rah-showcase) · [Source](https://github.com/HoosseinRahimi/Deutsch_rah)
+A hierarchical multi-agent crypto trading desk where agents propose, but a deterministic risk engine decides. Paper trading is the default, and execution is structurally gated by risk controls, reconciliation, idempotency, and kill switches.
 
-The current platform includes 204 German verbs, 192 vocabulary cards, 612 generated verb exercises, 864 skills tasks, and more than 1,350 sentence-structure exercises across A1–C2.
+### 🕸️ [CrawlForge](https://github.com/HoosseinRahimi/crawlforge)
+
+Responsible AI-assisted distributed web extraction with FastAPI, Celery, Playwright, structured outputs, robots enforcement, SSRF defenses, quotas, and observable background jobs.
+
+### 🇩🇪 [Deutsch Rah](https://github.com/HoosseinRahimi/Deutsch_rah)
+
+Persian-first German learning from A1 to C2, with adaptive practice, vocabulary, verb exercises, reading, listening, writing, speaking, and progress tracking.
+
+**[▶ Live website](https://deutsch-rah.vercel.app/)** · [Showcase](https://github.com/HoosseinRahimi/deutsch-rah-showcase)
 
 ### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI)
 
-**AI-native project operations for software teams.**
+AI-native project operations for software teams: a React cockpit, FastAPI services, repository intelligence, governed AI actions, Docker deployment, and CI validation.
 
-A privacy-safe Community Edition of a larger project-management and repository-intelligence platform, with a React cockpit, FastAPI backend, public-document retrieval, deterministic debugging assistance, governed AI actions, Docker deployment, and CI validation.
+**[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)**
 
-**[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)** · [Repository](https://github.com/HoosseinRahimi/ForgeFlow-AI)
+## 🧭 Engineering focus
 
-### 📡 [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)
-
-A self-hosted AI publishing platform for Telegram channels. It collects stories, generates editable multilingual drafts using OpenAI-compatible models, supports review-first scheduling, publishes through Telegram, and tracks engagement.
-
-Built with **React, TypeScript, tRPC, Express, MySQL/Drizzle, Docker, Telegram APIs, and LLM integrations**.
-
-### 🧭 [Team Project](https://github.com/HoosseinRahimi/team-project)
-
-An early-stage collaborative university project platform built as a modular monolith with **React + TypeScript, FastAPI, SQLite, Git-tracked shared data, Docker, tests, and CI**.
-
-The current stable phase includes per-user dashboards, activity management, calendar views, timeline history, project links, and dashboard statistics.
+- 🤖 AI-assisted engineering and project operations
+- 🧩 Production-style full-stack systems
+- 🔐 Security, privacy, and fail-closed design
+- ⚙️ Automation, testing, CI, and reliable developer workflows
+- 🌐 Computer networks, protocols, and infrastructure
 
 ## 🧰 Tech stack
 
@@ -89,47 +75,26 @@ The current stable phase includes per-user dashboards, activity management, cale
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
 
 </div>
 
 **AI & Data:** LLM integrations · OpenAI-compatible APIs · Pandas · scikit-learn · Jupyter · Streamlit  
-**Backend:** FastAPI · Express · tRPC · REST APIs · SQLite · MySQL · Drizzle ORM  
+**Backend:** FastAPI · Express · tRPC · REST APIs · PostgreSQL · SQLite · MySQL · Drizzle ORM  
 **Frontend:** React · TypeScript · Vite  
-**Infrastructure:** Docker · Docker Compose · GitHub Actions · Linux · Git  
+**Infrastructure:** Docker · Docker Compose · Redis · Celery · GitHub Actions · Linux · Git  
 **Networks:** TCP/IP · VLANs · routing · NAT · DHCP · ACLs · Cisco Packet Tracer
 
-## 🧪 Selected projects
+## 🖼️ Visual portfolio
 
-| Project | Focus |
-| --- | --- |
-| [🌐 University Network](https://github.com/HoosseinRahimi/university-network) | Campus networking, VLANs, DHCP, wireless, DNS, NAT, troubleshooting |
-| [🛰️ CCNA Complex Network Design](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design) | Routing, switching, NAT, DHCP, ACLs, integrated network services |
-| [🏠 Amsterdam Airbnb Explorer](https://github.com/HoosseinRahimi/airbnb-project) | Streamlit data exploration and interactive filtering |
-| [📰 Fake News Detection](https://github.com/HoosseinRahimi/fake-news-detection-nlp) | NLP preprocessing, CNN experiments, optimizer comparisons |
-| [🚜 Bulldozer Price Prediction](https://github.com/HoosseinRahimi/Bulldozer-price-prediction) | Regression, feature engineering, historical price prediction |
-| [🐀 Rat in a Maze](https://github.com/HoosseinRahimi/Rat-in-maze) | BFS, DFS, A*, backtracking, regression testing |
-| [🧠 Kosaraju SCC](https://github.com/HoosseinRahimi/kosaraju-algorithm) | Graph algorithms and strongly connected components |
-| [🐍 Python Mastery](https://github.com/HoosseinRahimi/python-mastery) | Python practice and deeper language fundamentals |
+<p align="center">
+  <img src="./assets/portfolio-case-study-cover.png" alt="AI, automation, APIs, OCR, and network engineering portfolio" width="100%" />
+</p>
 
-## 🎯 Engineering direction
-
-```text
-AI-native products
-      +
-software engineering
-      +
-security & networks
-      +
-automation / reliability
-      ↓
-practical systems that can be tested, operated, and improved
-```
-
-I am interested in building systems that do more than generate output: they should expose their state, enforce boundaries, survive bad inputs, and make debugging possible.
+Profile assets: [X banner](./assets/x-profile-banner.png) · [Telegram avatar](./assets/telegram-agent-avatar.png) · [Resume header](./assets/resume-header.png) · [Website OG image](./assets/website-og-image.png) · [Tutorial thumbnail](./assets/technical-tutorial-thumbnail.png) · [Email signature](./assets/email-signature-banner.png)
 
 ## 📍 Find me on GitHub
 
