@@ -45,6 +45,10 @@ A hierarchical multi-agent crypto trading desk where agents propose, but a deter
 
 Responsible AI-assisted distributed web extraction with FastAPI, Celery, Playwright, structured outputs, robots enforcement, SSRF defenses, quotas, and observable background jobs.
 
+### 📡 [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)
+
+A self-hosted Telegram publishing system with configurable OpenAI-compatible models, review-first drafts, multilingual output, encrypted credentials, scheduled publishing, and engagement analytics.
+
 ### 🇩🇪 [Deutsch Rah](https://github.com/HoosseinRahimi/Deutsch_rah)
 
 Persian-first German learning from A1 to C2, with adaptive practice, vocabulary, verb exercises, reading, listening, writing, speaking, and progress tracking.
@@ -57,13 +61,18 @@ AI-native project operations for software teams: a React cockpit, FastAPI servic
 
 **[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)**
 
+## 🌍 Open-source contributions
+
+- **[book-to-skill](https://github.com/virgiliojr94/book-to-skill)** — two merged features: [project-local skill paths](https://github.com/virgiliojr94/book-to-skill/pull/210) and [OpenClaw skill discovery and validation](https://github.com/virgiliojr94/book-to-skill/pull/209).
+- **Upstream work under review:** [LiteLLM](https://github.com/BerriAI/litellm/pull/41376), [Litestar](https://github.com/litestar-org/litestar/pull/5075), and [Astra / CIK](https://github.com/mimdot/CIK/pull/2).
+
 ## 🧭 Engineering focus
 
 - 🤖 AI-assisted engineering and project operations
 - 🧩 Production-style full-stack systems
 - 🔐 Security, privacy, and fail-closed design
 - ⚙️ Automation, testing, CI, and reliable developer workflows
-- 🌐 Computer networks, protocols, and infrastructure
+- 🌐 [Computer networks, protocols, and infrastructure](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design)
 
 ## 🧰 Tech stack
 
