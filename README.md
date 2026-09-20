@@ -2,7 +2,7 @@
 
 # Hossein Rahimi
 
-### Building secure AI-native products, agent systems, compatibility layers, and developer infrastructure
+### I build secure AI systems, agentic developer tools, and production-grade automation.
 
 **Python · TypeScript · FastAPI · React · AI Agents · Secure Automation · Networks**
 
@@ -29,59 +29,91 @@
 
 I build practical software where **AI, automation, APIs, security, and infrastructure** meet.
 
-My recent work is centered on AI-compatible APIs, agentic systems, production-style automation, safe-by-default integrations, and developer tooling. I care about systems that are testable, observable, failure-aware, and useful beyond a one-off demo.
+My work increasingly focuses on reliable AI systems rather than isolated demos: compatibility layers, agent workflows, review-first automation, security boundaries, observable services, CI/CD, and failure-aware production behavior.
 
-## ⚡ Recently shipped
+### 🎯 Current focus
 
-### 🧠 [Notion AI → OpenAI Compatible](https://github.com/HoosseinRahimi/Notion-AI-to-OpenAI-Compatible) · v0.4.0
+**Agentic software engineering · OpenAI-compatible infrastructure · secure human-in-the-loop automation · reliable AI integrations · developer tooling**
 
-An unofficial FastAPI compatibility layer that exposes Notion AI through OpenAI-style APIs.
+## 📊 Impact / proof
 
-Latest work adds **Responses API support**, hardened authentication and public-bind safeguards, per-session concurrency controls, readiness probes, standard SSE streaming, experimental tool-call guardrails, CI, type checking, coverage, Dependabot, and release/security documentation.
+| Area | Evidence in public projects |
+|---|---|
+| **Testing** | 86-test Telegram agent suite, backend/API tests, deterministic fixtures, multi-version Python CI |
+| **Security** | SSRF defenses, PII redaction, prompt-injection boundaries, safe defaults, URL policies, CodeQL, dependency review |
+| **Reliability** | Retry/backoff, timeouts, readiness probes, atomic persistence, delivery reconciliation, graceful shutdown |
+| **Production delivery** | Docker / Compose, GitHub Actions, MySQL/PostgreSQL/Redis, container smoke tests, deployment runbooks |
+| **AI infrastructure** | OpenAI-compatible Chat Completions + Responses APIs, streaming, model aliases, tool-call guardrails |
+| **Agent systems** | Multi-agent review flows, governed actions, Telegram automation, LLM orchestration, human approval gates |
 
-### 📡 [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)
+## 🚀 Flagship projects
 
-A self-hosted, review-first Telegram publishing platform built with React, TypeScript, tRPC, MySQL, Docker, and OpenAI-compatible models.
+| Project | What it demonstrates | Stack | Status |
+|---|---|---|---|
+| 🧠 **[Notion AI → OpenAI Compatible](https://github.com/HoosseinRahimi/Notion-AI-to-OpenAI-Compatible)** | OpenAI-compatible API layer, Responses API, SSE streaming, concurrency controls, security hardening | Python · FastAPI | **Active · v0.4.0** |
+| 🔥 **[ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI)** | AI-native project operations, repository intelligence, governed actions, multi-agent review | FastAPI · React · Docker | **Active · v0.15.0** |
+| 📡 **[AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)** | Review-first AI publishing, Telegram automation, delivery reconciliation, analytics | TypeScript · React · tRPC · MySQL | **Active** |
+| 🤖 **[Telegram AI Agent Userbot](https://github.com/HoosseinRahimi/telegram-agent-userbot)** | Safe personal-agent automation, LLM routing, prompt boundaries, PII protection | Python · Telethon · Docker | **Active** |
+| 🕸️ **[CrawlForge](https://github.com/HoosseinRahimi/crawlforge)** | Responsible distributed extraction with SSRF protection, quotas, workers, observability | FastAPI · Celery · Playwright · Redis · PostgreSQL | **Public portfolio** |
+| 🌐 **[CCNA Complex Network Design](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design)** | Routing, VLANs, NAT, DHCP, ACLs, and network infrastructure design | Cisco Packet Tracer | **Reference project** |
 
-Recent production hardening adds **delivery reconciliation**, safer remote-URL handling, LLM timeouts and retry policies, CodeQL, dependency review, production container smoke tests, database-backed delivery attempts, and stronger deployment/operations workflows.
+## ⚡ Recent engineering work
 
-### 🤖 [Telegram AI Agent Userbot](https://github.com/HoosseinRahimi/telegram-agent-userbot)
+### 🧠 Notion AI → OpenAI Compatible · v0.4.0
 
-A modular Telethon-based personal agent for summarization, digests, and controlled DM automation across Gemini, OpenAI-compatible providers, and local models.
+Added **Responses API support**, timing-safe API-key checks, public-bind protection, atomic state writes, per-session locks, bounded thread reuse, readiness probes, append-only SSE streaming, guarded experimental tools, CI, coverage, Ruff, Pyright, Dependabot, and security/release documentation.
 
-The latest reliability/security pass introduced **safe defaults**, allowlists and dry-run mode, per-chat concurrency control, atomic persistence, PII redaction, prompt-injection boundaries, sensitive-data interception, graceful shutdown, multi-stage Docker builds, CI across Python versions, and an **86-test** suite.
+### 📡 AI Channel Publisher
 
-### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI) · v0.15.0
+Hardened production delivery with **delivery reconciliation**, database-backed delivery attempts, safe remote-URL validation, LLM timeouts and transient-error retries, CodeQL, dependency review, MySQL-backed CI, production builds, and container smoke tests.
 
-AI-native project operations for software teams: React cockpit, FastAPI services, repository intelligence, deterministic debugging, governed actions, and Docker deployment.
+### 🤖 Telegram AI Agent Userbot
 
-The public Community Edition now includes a **seven-role multi-agent review demo**, tabbed cockpit views, project-health signals, repository retrieval over public documentation, and a propose → approve/reject automation pattern.
+Added **safe defaults**, allowlists, dry-run mode, per-chat locks, global concurrency limits, PII redaction, prompt-injection isolation, sensitive-data detection, retry/backoff, atomic persistence, non-root Docker execution, graceful shutdown, and an **86-test** suite.
 
-**[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)**
+### 🔥 ForgeFlow AI · v0.15.0
 
-## 🚀 Featured projects
+Expanded the Community Edition with a **seven-role multi-agent review demo**, project-health signals, repository retrieval over public documentation, deterministic debugging, and a governed **propose → approve/reject** action flow.
 
-### 🕸️ [CrawlForge](https://github.com/HoosseinRahimi/crawlforge)
+**[▶ Open the live ForgeFlow AI showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)**
 
-Responsible distributed web extraction with FastAPI, Celery, Playwright, PostgreSQL, Redis, SSRF defenses, robots.txt enforcement, structured outputs, quotas, metrics, and optional LLM-assisted extraction.
+## 🧩 Architecture snapshot
 
-### 💼 [Executive Business Portfolio](https://github.com/HoosseinRahimi/executive-business-portfolio)
+```mermaid
+flowchart LR
+    UI[React / Clients] --> API[FastAPI / tRPC / REST]
+    API --> Guard[Security + Policy Layer]
+    Guard --> Agents[Agents / LLM Orchestration]
+    Agents --> Models[OpenAI-compatible / Gemini / Local Models]
+    API --> Data[(PostgreSQL / MySQL / Redis)]
+    API --> Workers[Celery / Schedulers / Background Jobs]
+    Workers --> External[Telegram / Web / GitHub / Other Services]
+    CI[GitHub Actions + CodeQL] --> API
+```
 
-A reusable bilingual English/Persian executive portfolio template with RTL support, four themes, SEO metadata, JSON-LD, responsive layouts, centralized configuration, and GitHub Pages deployment.
+The recurring pattern is deliberate: **typed boundaries → deterministic controls → AI assistance → explicit approval where risk matters → observable execution**.
 
-### 🌐 [CCNA Complex Network Design](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design)
+## 🛡️ Security & reliability
 
-Network engineering work covering routing, VLANs, NAT, DHCP, ACLs, and Cisco Packet Tracer infrastructure design.
+I treat security and failure handling as architecture, not cleanup work.
+
+- **Fail-safe defaults:** automation can start disabled, dry-run, allowlisted, or approval-gated.
+- **Input boundaries:** prompt-injection isolation, schema validation, content filtering, and PII redaction.
+- **Network safety:** SSRF protections, private-address rejection, redirect validation, and safer remote URL policies.
+- **Operational resilience:** timeouts, retry/backoff, concurrency limits, atomic persistence, readiness/liveness checks, and graceful shutdown.
+- **Delivery correctness:** idempotency-aware workflows and explicit reconciliation for ambiguous external-service outcomes.
+- **Supply-chain hygiene:** CI, CodeQL, dependency review, Dependabot, linting, type checking, tests, and container smoke tests.
 
 ## 🌍 Open-source work
 
 - **[book-to-skill](https://github.com/virgiliojr94/book-to-skill)**: contributed merged support for [project-local skill paths](https://github.com/virgiliojr94/book-to-skill/pull/210) and [OpenClaw skill discovery and validation](https://github.com/virgiliojr94/book-to-skill/pull/209).
-- Additional public contribution work is available across my GitHub repositories and pull requests.
+- Additional public contribution work is visible across my repositories and pull requests.
 
 ## 🧭 Engineering focus
 
-- 🤖 Agentic systems, LLM integrations, and OpenAI-compatible APIs
-- 🛡️ Security-first automation, guardrails, and fail-closed behavior
+- 🤖 Agentic systems and LLM orchestration
+- 🔌 OpenAI-compatible APIs and compatibility layers
+- 🛡️ Security-first automation and human approval gates
 - 🧩 Production-style full-stack systems and developer tooling
 - ⚙️ Testing, CI/CD, observability, containers, and reliable operations
 - 🌐 Networks, distributed services, protocols, and infrastructure
@@ -103,11 +135,11 @@ Network engineering work covering routing, VLANs, NAT, DHCP, ACLs, and Cisco Pac
 
 </div>
 
-**AI & APIs:** LLM integrations · OpenAI-compatible APIs · Responses API · agent workflows · streaming · tool-call guardrails  
-**Backend:** FastAPI · Express · tRPC · REST APIs · PostgreSQL · MySQL · SQLite · Drizzle ORM  
+**AI & APIs:** LLM integrations · OpenAI-compatible APIs · Responses API · streaming · tool-call guardrails · agent workflows  
+**Backend:** FastAPI · Express · tRPC · REST · PostgreSQL · MySQL · SQLite · Drizzle ORM  
 **Frontend:** React · TypeScript · Vite  
 **Infrastructure:** Docker · Docker Compose · Redis · Celery · GitHub Actions · CodeQL · Linux · Git  
-**Security & Reliability:** SSRF defenses · PII redaction · rate limiting · retry/backoff · readiness checks · atomic state · dependency review  
+**Security:** SSRF defenses · PII redaction · rate limiting · retry/backoff · readiness checks · atomic state · dependency review  
 **Networks:** TCP/IP · VLANs · routing · NAT · DHCP · ACLs · Cisco Packet Tracer
 
 ## 🖼️ Visual portfolio
