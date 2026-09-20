@@ -2,9 +2,9 @@
 
 # Hossein Rahimi
 
-### Building AI-native products, developer tools, and reliable infrastructure
+### Building secure AI-native products, agent systems, compatibility layers, and developer infrastructure
 
-**Python · TypeScript · AI Engineering · Full-Stack · Security · Networks**
+**Python · TypeScript · FastAPI · React · AI Agents · Secure Automation · Networks**
 
 <a href="https://github.com/HoosseinRahimi?tab=repositories">
   <img src="https://img.shields.io/badge/Explore-Projects-2f81f7?style=for-the-badge&logo=github&logoColor=white" alt="Explore projects" />
@@ -27,52 +27,64 @@
 
 ## 👋 About me
 
-I build practical software where **AI, automation, data, and infrastructure** meet.
+I build practical software where **AI, automation, APIs, security, and infrastructure** meet.
 
-I care about systems that are understandable, testable, reproducible, and useful outside a notebook or one-off demo. My current work spans AI-assisted products, safety-first automation, full-stack platforms, applied data, and network engineering.
+My recent work is centered on AI-compatible APIs, agentic systems, production-style automation, safe-by-default integrations, and developer tooling. I care about systems that are testable, observable, failure-aware, and useful beyond a one-off demo.
 
-## 🚀 What I'm building
+## ⚡ Recently shipped
 
-### 🩺 [Health, Focus & Lifestyle Assistant](https://github.com/HoosseinRahimi/health-lifestyle-assistant)
+### 🧠 [Notion AI → OpenAI Compatible](https://github.com/HoosseinRahimi/Notion-AI-to-OpenAI-Compatible) · v0.4.0
 
-A cross-platform health and focus system with Android and Windows clients, a backend API, an admin console, local-first synchronization, and deterministic safety rules for medication workflows.
+An unofficial FastAPI compatibility layer that exposes Notion AI through OpenAI-style APIs.
 
-### 🛡️ [Trading Desk](https://github.com/HoosseinRahimi/trading-desk)
-
-A hierarchical multi-agent crypto trading desk where agents propose, but a deterministic risk engine decides. Paper trading is the default, and execution is structurally gated by risk controls, reconciliation, idempotency, and kill switches.
-
-### 🕸️ [CrawlForge](https://github.com/HoosseinRahimi/crawlforge)
-
-Responsible AI-assisted distributed web extraction with FastAPI, Celery, Playwright, structured outputs, robots enforcement, SSRF defenses, quotas, and observable background jobs.
+Latest work adds **Responses API support**, hardened authentication and public-bind safeguards, per-session concurrency controls, readiness probes, standard SSE streaming, experimental tool-call guardrails, CI, type checking, coverage, Dependabot, and release/security documentation.
 
 ### 📡 [AI Channel Publisher](https://github.com/HoosseinRahimi/ai-channel-publisher)
 
-A self-hosted Telegram publishing system with configurable OpenAI-compatible models, review-first drafts, multilingual output, encrypted credentials, scheduled publishing, and engagement analytics.
+A self-hosted, review-first Telegram publishing platform built with React, TypeScript, tRPC, MySQL, Docker, and OpenAI-compatible models.
 
-### 🇩🇪 [Deutsch Rah](https://github.com/HoosseinRahimi/Deutsch_rah)
+Recent production hardening adds **delivery reconciliation**, safer remote-URL handling, LLM timeouts and retry policies, CodeQL, dependency review, production container smoke tests, database-backed delivery attempts, and stronger deployment/operations workflows.
 
-Persian-first German learning from A1 to C2, with adaptive practice, vocabulary, verb exercises, reading, listening, writing, speaking, and progress tracking.
+### 🤖 [Telegram AI Agent Userbot](https://github.com/HoosseinRahimi/telegram-agent-userbot)
 
-**[▶ Live website](https://deutsch-rah.vercel.app/)** · [Showcase](https://github.com/HoosseinRahimi/deutsch-rah-showcase)
+A modular Telethon-based personal agent for summarization, digests, and controlled DM automation across Gemini, OpenAI-compatible providers, and local models.
 
-### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI)
+The latest reliability/security pass introduced **safe defaults**, allowlists and dry-run mode, per-chat concurrency control, atomic persistence, PII redaction, prompt-injection boundaries, sensitive-data interception, graceful shutdown, multi-stage Docker builds, CI across Python versions, and an **86-test** suite.
 
-AI-native project operations for software teams: a React cockpit, FastAPI services, repository intelligence, governed AI actions, Docker deployment, and CI validation.
+### 🔥 [ForgeFlow AI](https://github.com/HoosseinRahimi/ForgeFlow-AI) · v0.15.0
+
+AI-native project operations for software teams: React cockpit, FastAPI services, repository intelligence, deterministic debugging, governed actions, and Docker deployment.
+
+The public Community Edition now includes a **seven-role multi-agent review demo**, tabbed cockpit views, project-health signals, repository retrieval over public documentation, and a propose → approve/reject automation pattern.
 
 **[▶ Live showcase](https://hoosseinrahimi.github.io/ForgeFlow-AI/)**
 
-## 🌍 Open-source contributions
+## 🚀 Featured projects
 
-- **[book-to-skill](https://github.com/virgiliojr94/book-to-skill)** — two merged features: [project-local skill paths](https://github.com/virgiliojr94/book-to-skill/pull/210) and [OpenClaw skill discovery and validation](https://github.com/virgiliojr94/book-to-skill/pull/209).
-- **Upstream work under review:** [LiteLLM](https://github.com/BerriAI/litellm/pull/41376), [Litestar](https://github.com/litestar-org/litestar/pull/5075), and [Astra / CIK](https://github.com/mimdot/CIK/pull/2).
+### 🕸️ [CrawlForge](https://github.com/HoosseinRahimi/crawlforge)
+
+Responsible distributed web extraction with FastAPI, Celery, Playwright, PostgreSQL, Redis, SSRF defenses, robots.txt enforcement, structured outputs, quotas, metrics, and optional LLM-assisted extraction.
+
+### 💼 [Executive Business Portfolio](https://github.com/HoosseinRahimi/executive-business-portfolio)
+
+A reusable bilingual English/Persian executive portfolio template with RTL support, four themes, SEO metadata, JSON-LD, responsive layouts, centralized configuration, and GitHub Pages deployment.
+
+### 🌐 [CCNA Complex Network Design](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design)
+
+Network engineering work covering routing, VLANs, NAT, DHCP, ACLs, and Cisco Packet Tracer infrastructure design.
+
+## 🌍 Open-source work
+
+- **[book-to-skill](https://github.com/virgiliojr94/book-to-skill)**: contributed merged support for [project-local skill paths](https://github.com/virgiliojr94/book-to-skill/pull/210) and [OpenClaw skill discovery and validation](https://github.com/virgiliojr94/book-to-skill/pull/209).
+- Additional public contribution work is available across my GitHub repositories and pull requests.
 
 ## 🧭 Engineering focus
 
-- 🤖 AI-assisted engineering and project operations
-- 🧩 Production-style full-stack systems
-- 🔐 Security, privacy, and fail-closed design
-- ⚙️ Automation, testing, CI, and reliable developer workflows
-- 🌐 [Computer networks, protocols, and infrastructure](https://github.com/HoosseinRahimi/CCNA_Complex_Network_Design)
+- 🤖 Agentic systems, LLM integrations, and OpenAI-compatible APIs
+- 🛡️ Security-first automation, guardrails, and fail-closed behavior
+- 🧩 Production-style full-stack systems and developer tooling
+- ⚙️ Testing, CI/CD, observability, containers, and reliable operations
+- 🌐 Networks, distributed services, protocols, and infrastructure
 
 ## 🧰 Tech stack
 
@@ -91,10 +103,11 @@ AI-native project operations for software teams: a React cockpit, FastAPI servic
 
 </div>
 
-**AI & Data:** LLM integrations · OpenAI-compatible APIs · Pandas · scikit-learn · Jupyter · Streamlit  
-**Backend:** FastAPI · Express · tRPC · REST APIs · PostgreSQL · SQLite · MySQL · Drizzle ORM  
+**AI & APIs:** LLM integrations · OpenAI-compatible APIs · Responses API · agent workflows · streaming · tool-call guardrails  
+**Backend:** FastAPI · Express · tRPC · REST APIs · PostgreSQL · MySQL · SQLite · Drizzle ORM  
 **Frontend:** React · TypeScript · Vite  
-**Infrastructure:** Docker · Docker Compose · Redis · Celery · GitHub Actions · Linux · Git  
+**Infrastructure:** Docker · Docker Compose · Redis · Celery · GitHub Actions · CodeQL · Linux · Git  
+**Security & Reliability:** SSRF defenses · PII redaction · rate limiting · retry/backoff · readiness checks · atomic state · dependency review  
 **Networks:** TCP/IP · VLANs · routing · NAT · DHCP · ACLs · Cisco Packet Tracer
 
 ## 🖼️ Visual portfolio
@@ -114,6 +127,6 @@ Profile assets: [X banner](./assets/x-profile-banner.png) · [Telegram avatar](.
 
 <br />
 
-<sub>Build → test → break → debug → improve → repeat.</sub>
+<sub>Build → test → harden → observe → improve → repeat.</sub>
 
 </div>
