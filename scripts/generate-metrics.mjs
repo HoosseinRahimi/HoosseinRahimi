@@ -16,7 +16,18 @@ if (!/^[A-Za-z\d](?:[A-Za-z\d]|-(?=[A-Za-z\d])){0,38}$/.test(username)) {
 
 const github = createGitHubClient({ headers: buildApiHeaders(username, process.env.GITHUB_TOKEN) });
 const metrics = await collectMetrics({ username, github });
-const svg = renderDashboard({ username, ...metrics, now: new Date() });
+
+const featuredNames = [
+  "Notion-AI-to-OpenAI-Compatible",
+  "ai-channel-publisher",
+  "telegram-agent-userbot",
+  "crawlforge",
+];
+const featuredRepositories = featuredNames
+  .map((name) => metrics.ownedRepositories.find((repo) => repo.name === name))
+  .filter(Boolean);
+
+const svg = renderDashboard({ username, ...metrics, featuredRepositories, now: new Date() });
 
 await fs.mkdir("assets", { recursive: true });
 await fs.writeFile("assets/github-metrics.svg", stripTrailingWhitespace(svg));

@@ -184,15 +184,45 @@ const statCard = (x, label, value, accent) => `
     <text class="muted small" x="70" y="29">${escapeXml(label)}</text>
   </g>`;
 
+const splitDescription = (value, perLine = 27) => {
+  const words = String(value).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let current = "";
+  for (let index = 0; index < words.length; index += 1) {
+    const candidate = current ? `${current} ${words[index]}` : words[index];
+    if (candidate.length <= perLine) {
+      current = candidate;
+      continue;
+    }
+    if (!current) {
+      lines.push(truncate(words[index], perLine));
+      if (lines.length === 2) return lines;
+      continue;
+    }
+    if (lines.length === 1) {
+      lines.push(truncate(`${candidate} ${words.slice(index + 1).join(" ")}`, perLine));
+      return lines;
+    }
+    lines.push(current);
+    current = words[index];
+  }
+  if (current) lines.push(current);
+  return lines;
+};
+
 const repoCard = (repo, index) => {
   const x = 48 + (index % 2) * 176;
-  const y = 382 + Math.floor(index / 2) * 92;
+  const y = 382 + Math.floor(index / 2) * 96;
+  const [firstLine, secondLine = ""] = splitDescription(
+    repo.description || "GitHub project",
+  );
   return `
   <g transform="translate(${x} ${y})">
-    <rect class="card" width="164" height="80" rx="12"/>
+    <rect class="card" width="164" height="88" rx="12"/>
     <text class="link label" x="14" y="24">${escapeXml(truncate(repo.name, 22))}</text>
-    <text class="muted tiny" x="14" y="45">${escapeXml(truncate(repo.description || "GitHub project", 27))}</text>
-    <text class="muted tiny" x="14" y="65">★ ${Number(repo.stargazers_count) || 0}   ⑂ ${Number(repo.forks_count) || 0}</text>
+    <text class="muted tiny" x="14" y="44">${escapeXml(firstLine)}</text>
+    <text class="muted tiny" x="14" y="58">${escapeXml(secondLine)}</text>
+    <text class="muted tiny" x="14" y="77">★ ${Number(repo.stargazers_count) || 0}   ⑂ ${Number(repo.forks_count) || 0}</text>
   </g>`;
 };
 
@@ -225,7 +255,7 @@ export const renderRecentRows = (recentActivity) =>
     .map((activity, index) => {
       const y = 397 + index * 42;
       return `
-      <circle cx="824" cy="${y - 5}" r="5" fill="#2f81f7"/>
+      <circle cx="824" cy="${y - 5}" r="5" fill="#d9b877"/>
       <text class="label small" x="840" y="${y - 7}">${escapeXml(truncate(activity.label, 30))}</text>
       <text class="muted tiny" x="840" y="${y + 11}">${escapeXml(truncate(activity.repo, 32))}</text>
       <text class="muted tiny end" x="1214" y="${y + 1}">${activity.date}</text>`;
@@ -251,6 +281,7 @@ export const renderDashboard = ({
   ownedRepositories = filterOwnedRepositories(repositories, username),
   topLanguages,
   avatarData = "",
+  featuredRepositories = [],
   now = new Date(),
 }) => {
   const totalStars = sumBy(repositories, "stargazers_count");
@@ -259,61 +290,81 @@ export const renderDashboard = ({
   const heatmapCells = renderHeatmapCells(buildHeatmap(events, now));
   const languageBars = renderLanguageBars(topLanguages);
   const recentRows = renderRecentRows(summariseRecentActivity(events, username));
-  const featured = selectFeaturedRepositories(ownedRepositories);
+  const featured = featuredRepositories.length
+    ? featuredRepositories.slice(0, 4)
+    : selectFeaturedRepositories(ownedRepositories);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(user.name || user.login)} GitHub dashboard</title>
   <desc id="desc">Profile metrics, public activity, languages, and featured repositories.</desc>
   <defs>
     <clipPath id="avatar-clip"><circle cx="108" cy="112" r="64"/></clipPath>
+    <clipPath id="panel-clip"><rect width="1280" height="640" rx="16"/></clipPath>
+    <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06090f"/>
+      <stop offset="0.5" stop-color="#0a1019"/>
+      <stop offset="1" stop-color="#06090f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6e6c0"/>
+      <stop offset="0.55" stop-color="#d9b877"/>
+      <stop offset="1" stop-color="#a07c3d"/>
+    </linearGradient>
+    <radialGradient id="glow-gold" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d9b877" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#d9b877" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-violet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7c6cff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#7c6cff" stop-opacity="0"/>
+    </radialGradient>
     <style>
-      text { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill:#1f2328; }
-      .background { fill:#ffffff; }
-      .card { fill:#f6f8fa; stroke:#d0d7de; stroke-width:1; }
-      .divider { stroke:#d0d7de; stroke-width:1; }
-      .muted { fill:#656d76; }
-      .link { fill:#0969da; }
-      .heading { font-size:20px; font-weight:700; }
-      .title { font-size:25px; font-weight:700; }
-      .stat { font-size:25px; font-weight:700; }
+      text { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill:#e9eef7; }
+      .card { fill:rgba(255,255,255,0.035); stroke:rgba(217,184,119,0.16); stroke-width:1; }
+      .divider { stroke:rgba(217,184,119,0.2); stroke-width:1; }
+      .muted { fill:#8fa0b7; }
+      .link { fill:#e6c98a; }
+      .heading { font-size:20px; font-weight:700; letter-spacing:0.3px; }
+      .title { font-size:26px; font-weight:700; letter-spacing:0.3px; fill:#f4e6c6; }
+      .stat { font-size:26px; font-weight:700; fill:#f7ecd2; }
       .label { font-size:14px; font-weight:600; }
       .small { font-size:13px; }
       .tiny { font-size:11px; }
       .end { text-anchor:end; }
-      .track { fill:#eaeef2; }
-      .level-0 { fill:#ebedf0; }
-      .level-1 { fill:#0e4429; }
-      .level-2 { fill:#006d32; }
-      .level-3 { fill:#26a641; }
-      .level-4 { fill:#39d353; }
-      @media (prefers-color-scheme: dark) {
-        text { fill:#e6edf3; }
-        .background { fill:#0d1117; }
-        .card { fill:#161b22; stroke:#30363d; }
-        .divider { stroke:#30363d; }
-        .muted { fill:#8b949e; }
-        .link { fill:#58a6ff; }
-        .track, .level-0 { fill:#21262d; }
-      }
+      .track { fill:rgba(255,255,255,0.07); }
+      .level-0 { fill:#182031; }
+      .level-1 { fill:#3a2f18; }
+      .level-2 { fill:#6b5322; }
+      .level-3 { fill:#a98440; }
+      .level-4 { fill:#f0d49a; }
     </style>
   </defs>
-  <rect class="background" width="1280" height="640" rx="16"/>
+  <rect width="1280" height="640" rx="16" fill="#06090f"/>
+  <g clip-path="url(#panel-clip)">
+    <rect width="1280" height="640" fill="url(#sheet)"/>
+    <ellipse cx="1120" cy="10" rx="520" ry="320" fill="url(#glow-gold)"/>
+    <ellipse cx="90" cy="640" rx="460" ry="300" fill="url(#glow-violet)"/>
+  </g>
+  <rect x="1" y="1" width="1278" height="638" rx="15" fill="none" stroke="url(#gold)" stroke-opacity="0.22"/>
+  <path d="M1 54 V17 a16 16 0 0 1 16 -16 h30" fill="none" stroke="url(#gold)" stroke-opacity="0.55" stroke-width="1.6"/>
+  <path d="M1279 586 v37 a16 16 0 0 1 -16 16 h-30" fill="none" stroke="url(#gold)" stroke-opacity="0.55" stroke-width="1.6"/>
   <line class="divider" x1="416" y1="32" x2="416" y2="608"/>
 
+  <circle cx="108" cy="112" r="70" fill="none" stroke="url(#gold)" stroke-opacity="0.55"/>
   ${renderAvatar({ avatarData, user, username })}
   <text class="title" x="196" y="79">${escapeXml(user.name || user.login)}</text>
   <text class="link label" x="196" y="103">@${escapeXml(user.login)}</text>
   <text class="muted small" x="196" y="128">On GitHub for ${accountYears}+ years</text>
   <text class="muted small" x="196" y="150">${Number(user.followers) || 0} followers · ${Number(user.following) || 0} following</text>
 
-  <text class="heading" x="48" y="226">Building practical systems</text>
-  <text class="muted small" x="48" y="251">Python, machine learning, algorithms,</text>
-  <text class="muted small" x="48" y="271">and network engineering.</text>
+  <text class="heading" x="48" y="226">AI systems, built to last</text>
+  <text class="muted small" x="48" y="251">Backend engineering, secure automation,</text>
+  <text class="muted small" x="48" y="271">and production-minded AI tooling.</text>
 
   <g transform="translate(48 298)">
-    <rect class="card" width="78" height="30" rx="15"/><text class="label tiny" x="39" y="20" text-anchor="middle">Python</text>
-    <rect class="card" x="88" width="116" height="30" rx="15"/><text class="label tiny" x="146" y="20" text-anchor="middle">Machine Learning</text>
-    <rect class="card" x="214" width="88" height="30" rx="15"/><text class="label tiny" x="258" y="20" text-anchor="middle">Networking</text>
+    <rect class="card" width="126" height="30" rx="15"/><text class="label tiny" x="63" y="20" text-anchor="middle">Python · TypeScript</text>
+    <rect class="card" x="136" width="96" height="30" rx="15"/><text class="label tiny" x="184" y="20" text-anchor="middle">LLM systems</text>
+    <rect class="card" x="242" width="76" height="30" rx="15"/><text class="label tiny" x="280" y="20" text-anchor="middle">Security</text>
   </g>
 
   <text class="heading" x="48" y="365">Featured projects</text>
@@ -321,10 +372,10 @@ export const renderDashboard = ({
 
   <text class="heading" x="454" y="49">GitHub metrics</text>
   <text class="muted tiny end" x="1216" y="47">Updated ${now.toISOString().slice(0, 10)}</text>
-  ${statCard(454, "Public repositories", Number(user.public_repos) || 0, "#2f81f7")}
-  ${statCard(642, "Stars received", compact(totalStars), "#e3b341")}
-  ${statCard(830, "Repository forks", compact(totalForks), "#a371f7")}
-  ${statCard(1018, "Public events", events.length, "#3fb950")}
+  ${statCard(454, "Public repositories", Number(user.public_repos) || 0, "#d9b877")}
+  ${statCard(642, "Stars received", compact(totalStars), "#f0d49a")}
+  ${statCard(830, "Repository forks", compact(totalForks), "#a78bfa")}
+  ${statCard(1018, "Followers", Number(user.followers) || 0, "#6ee7b7")}
 
   <text class="heading" x="454" y="174">Public activity · last 26 weeks</text>
   ${heatmapCells}
@@ -335,6 +386,7 @@ export const renderDashboard = ({
   <rect class="level-3" x="539" y="283" width="9" height="9" rx="2"/>
   <rect class="level-4" x="552" y="283" width="9" height="9" rx="2"/>
   <text class="muted tiny" x="568" y="292">More</text>
+  ${events.length === 0 ? `<text class="muted tiny" x="606" y="292">No public events in this window yet.</text>` : ""}
 
   <line class="divider" x1="454" y1="326" x2="1216" y2="326"/>
   <text class="heading" x="454" y="360">Most used languages</text>

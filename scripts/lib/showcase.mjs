@@ -1,0 +1,146 @@
+export const escapeXml = (value = "") =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+
+export const PROFILE = {
+  name: "Hossein Rahimi",
+  handle: "HoosseinRahimi",
+  eyebrow: "AI SYSTEMS  ·  BACKEND ENGINEERING  ·  SECURE AUTOMATION",
+  headline: [
+    "I build reliable AI systems and developer tools with clear",
+    "API boundaries, security controls, and production-minded operations.",
+  ],
+  stack: "Python · TypeScript · FastAPI · React · Docker",
+  links: [
+    { label: "GitHub", href: "https://github.com/HoosseinRahimi" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/hossein-rahimi-cs/" },
+    { label: "ForgeFlow demo", href: "https://hoosseinrahimi.github.io/ForgeFlow-AI/" },
+  ],
+};
+
+const HERO_DEFS = `
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070c"/>
+      <stop offset="0.55" stop-color="#080d16"/>
+      <stop offset="1" stop-color="#0a1019"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8ebc9"/>
+      <stop offset="0.45" stop-color="#e2c184"/>
+      <stop offset="0.75" stop-color="#c9a25c"/>
+      <stop offset="1" stop-color="#9c7736"/>
+    </linearGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9b877" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#d9b877" stop-opacity="0.55"/>
+      <stop offset="0.8" stop-color="#d9b877" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#d9b877" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowGold" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d9b877" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#d9b877" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#d9b877" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7c6cff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#7c6cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="core" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6dd" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#e8ca8e" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#d9b877" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+    <clipPath id="hero-clip"><rect width="1280" height="340" rx="24"/></clipPath>
+  </defs>`;
+
+const orbitalArt = `
+  <g opacity="0.9" transform="translate(1050 160)">
+    <ellipse rx="132" ry="44" fill="none" stroke="#d9b877" stroke-opacity="0.22" transform="rotate(-18)"/>
+    <ellipse rx="150" ry="58" fill="none" stroke="#d9b877" stroke-opacity="0.14" transform="rotate(24)"/>
+    <ellipse rx="112" ry="86" fill="none" stroke="#8b7cff" stroke-opacity="0.16" transform="rotate(74)"/>
+    <circle r="66" fill="url(#core)" opacity="0.9">
+      <animate attributeName="opacity" values="0.55;0.9;0.55" dur="9s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="26" fill="#0b111c" stroke="url(#gold)" stroke-width="1.1"/>
+    <circle r="7" fill="#f4e2b8"/>
+    <circle cx="126" cy="6" r="3.2" fill="#e8ca8e"/>
+    <circle cx="-118" cy="-24" r="2.4" fill="#b9a8ff"/>
+    <circle cx="42" cy="-52" r="2.2" fill="#e8ca8e" opacity="0.85"/>
+    <circle cx="-64" cy="58" r="2.6" fill="#8b7cff" opacity="0.7"/>
+    <path d="M126 6 L42 -52 L-64 58" fill="none" stroke="#d9b877" stroke-opacity="0.16"/>
+  </g>`;
+
+const monogram = `
+  <g transform="translate(112 166)">
+    <circle r="86" fill="url(#glowGold)" opacity="0.75">
+      <animate attributeName="opacity" values="0.45;0.8;0.45" dur="7s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="62" fill="#0a101a" stroke="url(#gold)" stroke-opacity="0.75" stroke-width="1.2"/>
+    <circle r="53" fill="none" stroke="#ffffff" stroke-opacity="0.07"/>
+    <text x="0" y="12" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" letter-spacing="1.5" fill="url(#gold)">HR</text>
+    <g fill="#d9b877">
+      <path d="M0 -70 l3.5 4.2 -3.5 4.2 -3.5 -4.2 z"/>
+      <path d="M0 70 l3.5 4.2 -3.5 4.2 -3.5 -4.2 z"/>
+      <path d="M-70 0 l4.2 3.5 -4.2 3.5 -4.2 -3.5 z" transform="translate(0 0)"/>
+      <path d="M70 0 l4.2 3.5 -4.2 3.5 -4.2 -3.5 z" transform="translate(0 0)"/>
+    </g>
+  </g>`;
+
+export const renderHero = ({ profile = PROFILE } = {}) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="340" viewBox="0 0 1280 340" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">${escapeXml(profile.name)} — AI systems, backend engineering, secure automation</title>
+  <desc id="hero-desc">Profile banner: ${escapeXml(profile.name)}, ${escapeXml(profile.eyebrow.toLowerCase())}.</desc>
+  ${HERO_DEFS}
+  <rect width="1280" height="340" fill="url(#bg)"/>
+  <g clip-path="url(#hero-clip)">
+    <rect width="1280" height="340" fill="url(#grid)"/>
+    <ellipse cx="1120" cy="-40" rx="520" ry="310" fill="url(#glowGold)"/>
+    <ellipse cx="120" cy="380" rx="440" ry="280" fill="url(#glowViolet)"/>
+    ${orbitalArt}
+  </g>
+  <rect x="1" y="1" width="1278" height="338" rx="23.5" fill="none" stroke="url(#gold)" stroke-opacity="0.26"/>
+  <path d="M1 62 V25 a24 24 0 0 1 24 -24 h37" fill="none" stroke="url(#gold)" stroke-opacity="0.6" stroke-width="2"/>
+  <path d="M1279 278 v37 a24 24 0 0 1 -24 24 h-37" fill="none" stroke="url(#gold)" stroke-opacity="0.6" stroke-width="2"/>
+  ${monogram}
+  <text x="208" y="106" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" letter-spacing="3.1" fill="#c9a86a">${escapeXml(profile.eyebrow)}</text>
+  <text x="206" y="164" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" letter-spacing="0.5" fill="url(#gold)">${escapeXml(profile.name)}</text>
+  <line x1="208" y1="184" x2="352" y2="184" stroke="url(#gold)" stroke-width="1.4" opacity="0.55"/>
+  <text x="208" y="214" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17.5" fill="#c3cddc">${escapeXml(profile.headline[0])}</text>
+  <text x="208" y="238" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17.5" fill="#c3cddc">${escapeXml(profile.headline[1])}</text>
+  <path d="M212 272 l4 4.8 -4 4.8 -4 -4.8 z" fill="#c9a86a"/>
+  <text x="226" y="282" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" letter-spacing="0.6" fill="#8fa0b7">${escapeXml(profile.stack)}</text>
+  <line x1="40" y1="316" x2="1240" y2="316" stroke="url(#hairline)" stroke-width="1"/>
+</svg>`;
+
+export const linkPillWidth = (label) => Math.max(100, 64 + label.length * 6);
+
+export const renderLinkPill = ({ label, href }) => {
+  const width = linkPillWidth(label);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="40" viewBox="0 0 ${width} 40" role="img" aria-labelledby="pill-title">
+  <title id="pill-title">${escapeXml(label)} — ${escapeXml(href)}</title>
+  <rect x="0.5" y="0.5" width="${width - 1}" height="39" rx="19.5" fill="#0b111b" stroke="#d9b877" stroke-opacity="0.32"/>
+  <path d="M18 15 l4.5 5 -4.5 5 -4.5 -5 z" fill="none" stroke="#d9b877" stroke-opacity="0.9" stroke-width="1.2"/>
+  <text x="31" y="24.5" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" letter-spacing="0.4" fill="#e8eef7">${escapeXml(label)}</text>
+  <text x="${width - 15}" y="24.5" text-anchor="end" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#c9a86a">↗</text>
+</svg>`;
+};
+
+export const renderDivider = () =>
+  `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="28" viewBox="0 0 1280 28" role="presentation">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9b877" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#d9b877" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#d9b877" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <line x1="0" y1="14" x2="1280" y2="14" stroke="url(#fade)" stroke-width="1"/>
+</svg>`;

@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 
 const run = promisify(execFile);
@@ -18,7 +18,7 @@ const generate = async (t, env) => {
     process.execPath,
     [
       "--import",
-      path.join(repoRoot, "tests/helpers/stub-github-fetch.mjs"),
+      pathToFileURL(path.join(repoRoot, "tests/helpers/stub-github-fetch.mjs")).href,
       path.join(repoRoot, "scripts/generate-metrics.mjs"),
     ],
     { cwd: workingDirectory, env: { ...process.env, GITHUB_USER: "", GITHUB_TOKEN: "", ...env } },
