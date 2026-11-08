@@ -130,6 +130,12 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 
 <img src="assets/divider.svg" alt="" width="100%">
 
+## Research
+
+- **[Training-Free Photometric Test-Time Fusion for Traffic-Sign Detection: A Full-Fold ITSD Study](https://github.com/HoosseinRahimi/eamf-itsd-mvip2026)** (MVIP 2026) — reproducible full-fold experiments: code, protocols, measured outputs, and limitations, with a versioned evidence release.
+
+<img src="assets/divider.svg" alt="" width="100%">
+
 ## How I work
 
 - **Testing** — deterministic fixtures, contract tests, an 86-test Telegram agent suite, and multi-version CI.
