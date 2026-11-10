@@ -92,6 +92,17 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 
 <img src="assets/divider.svg" alt="" width="100%">
 
+## Contribution trail
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HoosseinRahimi/HoosseinRahimi/output/contribution-snake-dark.svg">
+  <img alt="Animated GitHub contribution graph" src="https://raw.githubusercontent.com/HoosseinRahimi/HoosseinRahimi/output/contribution-snake.svg" width="100%">
+</picture>
+
+<sub>Generated daily from public GitHub contributions by GitHub Actions. The animation appears after the first workflow run publishes the output branch.</sub>
+
+<img src="assets/divider.svg" alt="" width="100%">
+
 ## More work
 
 <table>
