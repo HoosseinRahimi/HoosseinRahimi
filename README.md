@@ -209,6 +209,7 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 
 - Building governed agent systems and production-grade LLM infrastructure.
 - Open to collaboration on AI systems, developer tools, and security-heavy backends.
+- Based in Tehran, preparing a move to Germany — open to AI Engineer / Backend roles and research internships (summer 2027).
 
 <div align="center">
 <br>
