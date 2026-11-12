@@ -99,7 +99,7 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
   <img alt="Animated GitHub contribution graph" src="https://raw.githubusercontent.com/HoosseinRahimi/HoosseinRahimi/output/contribution-snake.svg" width="100%">
 </picture>
 
-<sub>Generated daily from public GitHub contributions by GitHub Actions. The animation appears after the first workflow run publishes the output branch.</sub>
+<sub>Generated daily from public GitHub contributions by GitHub Actions.</sub>
 
 <img src="assets/divider.svg" alt="" width="100%">
 
