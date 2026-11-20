@@ -19,7 +19,7 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 <td width="50%" valign="top">
 <a href="https://hoosseinrahimi.github.io/ForgeFlow-AI/"><img src="assets/showcase/forgeflow-ai.jpg" alt="ForgeFlow AI — glass workflow pipeline over an obsidian surface" width="100%"></a>
 <br><br>
-<a href="https://github.com/HoosseinRahimi/ForgeFlow-AI"><b>ForgeFlow AI</b></a> <code>v0.15.0</code> · <a href="https://hoosseinrahimi.github.io/ForgeFlow-AI/">live demo ↗</a>
+<a href="https://github.com/HoosseinRahimi/ForgeFlow-AI"><b>ForgeFlow AI</b></a> <a href="https://github.com/HoosseinRahimi/ForgeFlow-AI/releases/tag/v0.13.0"><code>v0.13.0</code></a> · <a href="https://hoosseinrahimi.github.io/ForgeFlow-AI/">live demo ↗</a>
 <br>
 <sub>Community edition of an AI-native project operations platform: governed copilot, repository intelligence, and <b>propose → approve → execute</b> actions.</sub>
 <br><br>
@@ -209,7 +209,7 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 
 - Building governed agent systems and production-grade LLM infrastructure.
 - Open to collaboration on AI systems, developer tools, and security-heavy backends.
-- Based in Tehran, preparing a move to Germany — open to AI Engineer / Backend roles and research internships (summer 2027).
+- Based in Tehran, preparing a move to Germany — open to AI Engineer / Backend Engineer roles, starting either before or after the relocation, and to research internships for summer 2027.
 
 <div align="center">
 <br>
