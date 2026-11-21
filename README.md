@@ -141,6 +141,7 @@ I build **reliable AI systems and developer tools** — clear API boundaries, se
 ## Open source
 
 - **[book-to-skill](https://github.com/virgiliojr94/book-to-skill):** merged [project-local skill paths (#210)](https://github.com/virgiliojr94/book-to-skill/pull/210) and [OpenClaw skill discovery and validation (#209)](https://github.com/virgiliojr94/book-to-skill/pull/209).
+- **[Playwright (Python) (#3363)](https://github.com/microsoft/playwright-python/pull/3363):** open — fixes [#3361](https://github.com/microsoft/playwright-python/issues/3361): relative HAR/trace paths were resolved by the separate driver process; now normalized against the client's cwd with a regression test.
 - **[LiteLLM (#41376)](https://github.com/BerriAI/litellm/pull/41376):** closed/not merged (superseded — see [audit #48188](https://github.com/BerriAI/litellm/pull/48188)); the xAI Grok-4 capability-pricing rows were retired on main and should not be recreated.
 
 <img src="assets/divider.svg" alt="" width="100%">
