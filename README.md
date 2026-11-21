@@ -6,6 +6,8 @@
 
 </div>
 
+> **Open to work** · **Roles:** AI Engineer / Backend Engineer / LLM Infrastructure Engineer · **Location:** Germany (remote considered, relocation in progress from Tehran, GMT+3:30) · **Research:** summer 2027 internships · **Contact:** [LinkedIn](https://www.linkedin.com/in/hossein-rahimi-cs/) or [GitHub](https://github.com/HoosseinRahimi).
+
 I build **reliable AI systems and developer tools** — clear API boundaries, security controls, and production-minded operations. My work spans governed agent workflows, LLM gateways, distributed extraction, and the backends and dashboards that keep them observable.
 
 **Now:** Building governed AI agents and reliable backend infrastructure · **Open to AI / Backend Engineering roles in Germany**.
