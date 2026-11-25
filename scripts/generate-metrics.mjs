@@ -18,9 +18,9 @@ const github = createGitHubClient({ headers: buildApiHeaders(username, process.e
 const metrics = await collectMetrics({ username, github });
 
 const featuredNames = [
+  "ForgeFlow-AI",
   "Notion-AI-to-OpenAI-Compatible",
   "ai-channel-publisher",
-  "telegram-agent-userbot",
   "crawlforge",
 ];
 const featuredRepositories = featuredNames

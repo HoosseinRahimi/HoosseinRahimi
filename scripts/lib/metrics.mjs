@@ -216,13 +216,22 @@ const repoCard = (repo, index) => {
   const [firstLine, secondLine = ""] = splitDescription(
     repo.description || "GitHub project",
   );
+  const language = repo.language || "Project";
+  const dotColor = languageColors[repo.language] || "#8b949e";
+  const stars = Number(repo.stargazers_count) || 0;
+  const forks = Number(repo.forks_count) || 0;
+  const metaParts = [language];
+  if (repo.homepage) metaParts.push("Live");
+  if (stars > 0) metaParts.push(`★ ${stars}`);
+  if (forks > 0) metaParts.push(`⑂ ${forks}`);
   return `
   <g transform="translate(${x} ${y})">
     <rect class="card" width="164" height="88" rx="12"/>
     <text class="link label" x="14" y="24">${escapeXml(truncate(repo.name, 22))}</text>
     <text class="muted tiny" x="14" y="44">${escapeXml(firstLine)}</text>
     <text class="muted tiny" x="14" y="58">${escapeXml(secondLine)}</text>
-    <text class="muted tiny" x="14" y="77">★ ${Number(repo.stargazers_count) || 0}   ⑂ ${Number(repo.forks_count) || 0}</text>
+    <circle cx="18" cy="73" r="3.5" fill="${dotColor}"/>
+    <text class="muted tiny" x="26" y="77">${escapeXml(metaParts.join(" · "))}</text>
   </g>`;
 };
 
@@ -284,8 +293,6 @@ export const renderDashboard = ({
   featuredRepositories = [],
   now = new Date(),
 }) => {
-  const totalStars = sumBy(repositories, "stargazers_count");
-  const totalForks = sumBy(repositories, "forks_count");
   const accountYears = accountAgeInYears(user.created_at, now);
   const heatmapCells = renderHeatmapCells(buildHeatmap(events, now));
   const languageBars = renderLanguageBars(topLanguages);
@@ -373,9 +380,9 @@ export const renderDashboard = ({
   <text class="heading" x="454" y="49">GitHub metrics</text>
   <text class="muted tiny end" x="1216" y="47">Updated ${now.toISOString().slice(0, 10)}</text>
   ${statCard(454, "Public repositories", Number(user.public_repos) || 0, "#d9b877")}
-  ${statCard(642, "Stars received", compact(totalStars), "#f0d49a")}
-  ${statCard(830, "Repository forks", compact(totalForks), "#a78bfa")}
-  ${statCard(1018, "Followers", Number(user.followers) || 0, "#6ee7b7")}
+  ${statCard(642, "Original projects", ownedRepositories.length, "#f0d49a")}
+  ${statCard(830, "Active languages", topLanguages.length, "#a78bfa")}
+  ${statCard(1018, "Public events", events.length, "#6ee7b7")}
 
   <text class="heading" x="454" y="174">Public activity · last 26 weeks</text>
   ${heatmapCells}

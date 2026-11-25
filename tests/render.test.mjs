@@ -105,7 +105,11 @@ test("renderDashboard renders profile, stats, and featured repositories", () => 
   assert.match(svg, />On GitHub for 11\+ years</);
   assert.match(svg, />12 followers · 3 following</);
   assert.match(svg, />Updated 2026-08-08</);
-  assert.match(svg, />115</);
+  assert.match(svg, />Original projects</);
+  assert.match(svg, />Active languages</);
+  assert.match(svg, />Public events</);
+  assert.doesNotMatch(svg, /★ 0/);
+  assert.doesNotMatch(svg, /⑂ 0/);
   assert.match(svg, />alpha</);
   assert.match(svg, />beta</);
   assert.doesNotMatch(svg, />forked</);

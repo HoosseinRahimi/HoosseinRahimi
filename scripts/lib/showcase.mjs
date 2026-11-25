@@ -16,7 +16,7 @@ export const PROFILE = {
   ],
   stack: "Python · TypeScript · FastAPI · React · Docker",
   links: [
-    { label: "GitHub", href: "https://github.com/HoosseinRahimi" },
+    { label: "Portfolio", href: "https://hoosseinrahimi.github.io/" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/hossein-rahimi-cs/" },
     { label: "ForgeFlow demo", href: "https://hoosseinrahimi.github.io/ForgeFlow-AI/" },
   ],
